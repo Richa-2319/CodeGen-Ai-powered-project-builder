@@ -1,0 +1,79 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: account-service
+  namespace: codegen-core
+spec:
+  template:
+    spec:
+      containers:
+        - name: account-service
+          env:
+            - name: DB_USERNAME
+              value: null
+              valueFrom:
+                secretKeyRef: {name: runtime-endpoints, key: ACCOUNT_DB_USERNAME}
+            - name: DB_URL
+              value: null
+              valueFrom:
+                secretKeyRef: {name: runtime-endpoints, key: ACCOUNT_DB_URL}
+            - name: KAFKA_BOOTSTRAP_SERVERS
+              value: null
+              valueFrom:
+                secretKeyRef: {name: runtime-endpoints, key: KAFKA_BOOTSTRAP_SERVERS}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: workspace-service
+  namespace: codegen-core
+spec:
+  template:
+    spec:
+      containers:
+        - name: workspace-service
+          env:
+            - name: DB_USERNAME
+              value: null
+              valueFrom:
+                secretKeyRef: {name: runtime-endpoints, key: WORKSPACE_DB_USERNAME}
+            - name: DB_URL
+              value: null
+              valueFrom:
+                secretKeyRef: {name: runtime-endpoints, key: WORKSPACE_DB_URL}
+            - name: REDIS_URL
+              value: null
+              valueFrom:
+                secretKeyRef: {name: runtime-endpoints, key: REDIS_URL}
+            - name: KAFKA_BOOTSTRAP_SERVERS
+              value: null
+              valueFrom:
+                secretKeyRef: {name: runtime-endpoints, key: KAFKA_BOOTSTRAP_SERVERS}
+            - name: MINIO_URL
+              value: null
+              valueFrom:
+                secretKeyRef: {name: runtime-endpoints, key: OBJECT_STORAGE_URL}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: intelligence-service
+  namespace: codegen-core
+spec:
+  template:
+    spec:
+      containers:
+        - name: intelligence-service
+          env:
+            - name: DB_USERNAME
+              value: null
+              valueFrom:
+                secretKeyRef: {name: runtime-endpoints, key: INTELLIGENCE_DB_USERNAME}
+            - name: DB_URL
+              value: null
+              valueFrom:
+                secretKeyRef: {name: runtime-endpoints, key: INTELLIGENCE_DB_URL}
+            - name: KAFKA_BOOTSTRAP_SERVERS
+              value: null
+              valueFrom:
+                secretKeyRef: {name: runtime-endpoints, key: KAFKA_BOOTSTRAP_SERVERS}

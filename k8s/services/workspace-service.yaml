@@ -1,0 +1,154 @@
+
+# 1. Create a dedicated ServiceAccount in codegen-core
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: workspace-service-account
+  namespace: codegen-core
+
+---
+# 2. Create a Role in codegen-previews with the exact permissions Fabric8 needs
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: preview-manager-role
+  namespace: codegen-previews
+rules:
+  - apiGroups: [""]
+    resources: ["pods", "pods/exec", "pods/log", "pods/status"]
+    verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
+
+---
+# 3. Bind the ServiceAccount (from codegen-core) to the Role (in codegen-previews)
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: preview-manager-binding
+  namespace: codegen-previews
+subjects:
+  - kind: ServiceAccount
+    name: workspace-service-account
+    namespace: codegen-core # Note the cross-namespace reference here
+roleRef:
+  kind: Role
+  name: preview-manager-role
+  apiGroup: rbac.authorization.k8s.io
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: workspace-service
+  namespace: codegen-core
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: workspace-service
+  template:
+    metadata:
+      labels:
+        app: workspace-service
+    spec:
+      serviceAccountName: workspace-service-account
+      containers:
+        - name: workspace-service
+          image: docker.io/richak2319/codegen-workspace-service:0.0.1
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 9020
+          envFrom:
+            - secretRef:
+                name: runtime-extra-config
+                optional: true
+            - configMapRef:
+                name: codegen-shared-config
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: k8s
+            - name: DB_URL
+              value: jdbc:postgresql://pgvector:5432/workspace_db
+            - name: DB_USERNAME
+              value: workspace_user
+            - name: REDIS_URL
+              value: redis://redis:6379
+            - name: SPRING_DATA_REDIS_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: app-secrets
+                  key: REDIS_PASSWORD
+            - name: KAFKA_BOOTSTRAP_SERVERS
+              value: kafka:9092
+            - name: MINIO_URL
+              value: http://minio:9000
+            - name: ACCOUNT_SERVICE_URI
+              value: http://account-service
+            - name: PREVIEW_ENABLED
+              value: "false"
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: app-secrets
+                  key: WORKSPACE_DB_PASSWORD
+            - name: MINIO_ROOT_USER
+              valueFrom:
+                secretKeyRef:
+                  name: app-secrets
+                  key: MINIO_ROOT_USER
+            - name: MINIO_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: app-secrets
+                  key: MINIO_ROOT_PASSWORD
+            - name: JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: app-secrets
+                  key: JWT_SECRET
+            - name: INTERNAL_SERVICE_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: app-secrets
+                  key: INTERNAL_SERVICE_KEY
+          resources:
+            requests:
+              cpu: 100m
+              memory: 256Mi
+            limits:
+              cpu: 250m
+              memory: 512Mi
+          readinessProbe:
+            httpGet:
+              path: /workspace/actuator/health/readiness
+              port: 9020
+            initialDelaySeconds: 90
+            periodSeconds: 15
+            timeoutSeconds: 5
+            failureThreshold: 3
+          startupProbe:
+            httpGet:
+              path: /workspace/actuator/health/liveness
+              port: 9020
+            failureThreshold: 30
+            periodSeconds: 10
+            timeoutSeconds: 5
+          livenessProbe:
+            httpGet:
+              path: /workspace/actuator/health/liveness
+              port: 9020
+            periodSeconds: 20
+            timeoutSeconds: 5
+            failureThreshold: 3
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: workspace-service
+  namespace: codegen-core
+spec:
+  selector:
+    app: workspace-service
+  ports:
+    - port: 80
+      targetPort: 9020

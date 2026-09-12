@@ -1,0 +1,107 @@
+# k8s/services/account-service.yaml
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: account-service
+  namespace: codegen-core
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: account-service
+  template:
+    metadata:
+      labels:
+        app: account-service
+    spec:
+      containers:
+        - name: account-service
+          image: docker.io/richak2319/codegen-account-service:0.0.1
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 9050
+          envFrom:
+            - secretRef:
+                name: runtime-extra-config
+                optional: true
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: k8s
+            - name: DB_URL
+              value: jdbc:postgresql://pgvector:5432/account_db
+            - name: DB_USERNAME
+              value: account_user
+            - name: KAFKA_BOOTSTRAP_SERVERS
+              value: kafka:9092
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: app-secrets
+                  key: ACCOUNT_DB_PASSWORD
+            - name: JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: app-secrets
+                  key: JWT_SECRET
+            - name: INTERNAL_SERVICE_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: app-secrets
+                  key: INTERNAL_SERVICE_KEY
+            - name: STRIPE_API_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: app-secrets
+                  key: STRIPE_API_KEY
+            - name: STRIPE_WEBHOOK_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: app-secrets
+                  key: STRIPE_WEBHOOK_SECRET
+            - name: APP_FRONTEND_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: codegen-shared-config
+                  key: APP_FRONTEND_URL
+          resources:
+            requests:
+              cpu: 100m
+              memory: 256Mi
+            limits:
+              cpu: 250m
+              memory: 512Mi
+          readinessProbe:
+            httpGet:
+              path: /account/actuator/health/readiness
+              port: 9050
+            initialDelaySeconds: 120
+            periodSeconds: 15
+            timeoutSeconds: 5
+            failureThreshold: 3
+          startupProbe:
+            httpGet:
+              path: /account/actuator/health/liveness
+              port: 9050
+            failureThreshold: 30 # 30 * 10s = 300s max startup time
+            periodSeconds: 10
+            timeoutSeconds: 5
+          livenessProbe:
+            httpGet:
+              path: /account/actuator/health/liveness
+              port: 9050
+            periodSeconds: 20
+            timeoutSeconds: 5
+            failureThreshold: 3
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: account-service
+  namespace: codegen-core
+spec:
+  selector:
+    app: account-service
+  ports:
+    - port: 80
+      targetPort: 9050

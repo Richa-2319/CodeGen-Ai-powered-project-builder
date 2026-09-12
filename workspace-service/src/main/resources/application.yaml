@@ -1,0 +1,70 @@
+spring:
+  application:
+    name: workspace-service
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/workspace_db}
+    username: ${DB_USERNAME:workspace_user}
+    password: ${DB_PASSWORD}
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+  data:
+    redis:
+      url: ${REDIS_URL:redis://localhost:6379}
+  kafka:
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JacksonJsonSerializer
+      acks: all
+    consumer:
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JacksonJsonDeserializer
+      auto-offset-reset: earliest
+      enable-auto-commit: false
+      properties:
+        "spring.json.trusted.packages": com.project.distributed_codegen.common_lib.event
+
+server:
+  port: ${PORT:9020}
+  servlet:
+    context-path: /workspace
+  forward-headers-strategy: framework
+
+jwt:
+  secret-key: ${JWT_SECRET}
+
+internal:
+  service-key: ${INTERNAL_SERVICE_KEY}
+
+minio:
+  url: ${MINIO_URL:http://localhost:9000}
+  access-key: ${MINIO_ROOT_USER}
+  secret-key: ${MINIO_ROOT_PASSWORD}
+  project-bucket: ${MINIO_PROJECT_BUCKET:projects}
+
+app:
+  download:
+    max-files: ${DOWNLOAD_MAX_FILES:2000}
+    max-uncompressed-bytes: ${DOWNLOAD_MAX_UNCOMPRESSED_BYTES:52428800}
+  preview:
+    enabled: ${PREVIEW_ENABLED:false}
+    namespace: ${PREVIEW_NAMESPACE:codegen-previews}
+    domain: ${PREVIEW_DOMAIN:previews.codegen.example.com}
+    scheme: ${PREVIEW_SCHEME:https}
+    proxy-port: ${PROXY_PORT:443}
+
+services:
+  account:
+    url: ${ACCOUNT_SERVICE_URI:http://localhost:9050}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus
+  endpoint:
+    health:
+      probes:
+        enabled: true

@@ -1,0 +1,101 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: codegen-build
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: codegen-connectivity-smoke
+  namespace: codegen-build
+spec:
+  selector:
+    app: codegen-connectivity-smoke
+  ports:
+    - port: 8080
+      targetPort: 8080
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: codegen-connectivity-smoke
+  namespace: codegen-build
+spec:
+  backoffLimit: 0
+  activeDeadlineSeconds: 180
+  template:
+    metadata:
+      labels:
+        app: codegen-connectivity-smoke
+    spec:
+      restartPolicy: Never
+      automountServiceAccountToken: false
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 65532
+        runAsGroup: 65532
+        seccompProfile:
+          type: RuntimeDefault
+      containers:
+        - name: check
+          image: docker.io/library/python:3.13-slim
+          command: [python, -u, -c]
+          args:
+            - |
+              import http.server, json, socket, threading, time, urllib.request, urllib.error
+              class Handler(http.server.BaseHTTPRequestHandler):
+                  def do_GET(self):
+                      self.send_response(200)
+                      self.end_headers()
+                      self.wfile.write(b'codegen-service-routing-ok')
+                  def log_message(self, *args):
+                      pass
+              server = http.server.HTTPServer(('0.0.0.0', 8080), Handler)
+              threading.Thread(target=server.serve_forever, daemon=True).start()
+              results = []
+              try:
+                  socket.getaddrinfo('kubernetes.default.svc.cluster.local', 443)
+                  results.append({'check': 'kubernetes_service_dns', 'passed': True})
+                  for attempt in range(12):
+                      try:
+                          with urllib.request.urlopen('http://codegen-connectivity-smoke.codegen-build.svc.cluster.local:8080', timeout=5) as response:
+                              assert response.read(100) == b'codegen-service-routing-ok'
+                          break
+                      except Exception:
+                          if attempt == 11:
+                              raise
+                          time.sleep(2)
+                  results.append({'check': 'pod_to_clusterip_service', 'passed': True})
+                  urls = [
+                      ('docker_registry_tls', 'https://registry-1.docker.io/v2/', {401}),
+                      ('project_registry_tls', 'https://iad.ocir.io/v2/', {401}),
+                      ('maven_repository_tls', 'https://repo.maven.apache.org/maven2/', {200}),
+                      ('npm_registry_tls', 'https://registry.npmjs.org/-/ping', {200}),
+                      ('genai_endpoint_tls', 'https://inference.generativeai.us-chicago-1.oci.oraclecloud.com/', {200, 401, 404}),
+                  ]
+                  for name, url, expected in urls:
+                      try:
+                          with urllib.request.urlopen(url, timeout=15) as response:
+                              status = response.status
+                      except urllib.error.HTTPError as response:
+                          status = response.code
+                      assert status in expected, name
+                      results.append({'check': name, 'http_status': status, 'passed': True})
+                  print(json.dumps({'passed': True, 'results': results}))
+              except Exception as error:
+                  print(json.dumps({'passed': False, 'completed_checks': results, 'error_type': type(error).__name__}))
+                  raise SystemExit(1)
+              finally:
+                  server.shutdown()
+          resources:
+            requests:
+              cpu: 50m
+              memory: 64Mi
+            limits:
+              cpu: 250m
+              memory: 128Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop: [ALL]

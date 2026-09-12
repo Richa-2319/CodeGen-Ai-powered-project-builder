@@ -1,0 +1,10 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - account-service.yaml
+  - workspace-service.yaml
+  - intelligence-service.yaml
+  - api-gateway.yaml
+  - frontend.yaml
+# config-service is optional: these applications use local application.yaml
+# plus environment variables and do not import remote Spring configuration.

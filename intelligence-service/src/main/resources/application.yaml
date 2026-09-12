@@ -1,0 +1,61 @@
+spring:
+  application:
+    name: intelligence-service
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/intelligence_db}
+    username: ${DB_USERNAME:intelligence_user}
+    password: ${DB_PASSWORD}
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+  kafka:
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JacksonJsonSerializer
+      acks: all
+    consumer:
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JacksonJsonDeserializer
+      auto-offset-reset: earliest
+      enable-auto-commit: false
+      properties:
+        "spring.json.trusted.packages": com.project.distributed_codegen.common_lib.event
+  ai:
+    openai:
+      api-key: ${AI_API_KEY}
+      base-url: ${AI_BASE_URL:https://api.openai.com}
+      chat:
+        completions-path: ${AI_CHAT_COMPLETIONS_PATH:/v1/chat/completions}
+        options:
+          model: ${AI_MODEL:gpt-4o-mini}
+          max-completion-tokens: ${AI_MAX_COMPLETION_TOKENS:2048}
+
+server:
+  port: ${PORT:9030}
+  servlet:
+    context-path: /intelligence
+  forward-headers-strategy: framework
+
+jwt:
+  secret-key: ${JWT_SECRET}
+
+internal:
+  service-key: ${INTERNAL_SERVICE_KEY}
+
+services:
+  account:
+    url: ${ACCOUNT_SERVICE_URI:http://localhost:9050}
+  workspace:
+    url: ${WORKSPACE_SERVICE_URI:http://localhost:9020}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus
+  endpoint:
+    health:
+      probes:
+        enabled: true

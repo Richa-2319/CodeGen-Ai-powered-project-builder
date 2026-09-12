@@ -1,0 +1,76 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+# Self-contained demonstration only. Applying creates three persistent volumes.
+resources:
+  - ../infra
+  - ../services
+  - ../stateful
+  - minio-init.yaml
+replicas:
+  - name: account-service
+    count: 1
+  - name: workspace-service
+    count: 1
+  - name: intelligence-service
+    count: 1
+  - name: api-gateway
+    count: 1
+  - name: codegen-frontend
+    count: 1
+patches:
+  - target:
+      kind: StatefulSet
+      name: (pgvector|kafka|minio)
+    patch: |-
+      - op: replace
+        path: /spec/volumeClaimTemplates/0/spec/storageClassName
+        value: oci-bv
+      - op: replace
+        path: /spec/volumeClaimTemplates/0/spec/resources/requests/storage
+        value: 50Gi
+  - target:
+      kind: StatefulSet
+      name: redis
+    patch: |-
+      - op: remove
+        path: /spec/volumeClaimTemplates
+      - op: add
+        path: /spec/template/spec/volumes
+        value:
+          - name: redis-data
+            emptyDir:
+              sizeLimit: 256Mi
+      - op: replace
+        path: /spec/template/spec/containers/0/command
+        value:
+          - /bin/sh
+          - -c
+          - exec redis-server --save "" --appendonly no --requirepass "$REDIS_PASSWORD"
+  - target:
+      kind: PodDisruptionBudget
+    patch: |-
+      - op: replace
+        path: /spec/minAvailable
+        value: 0
+replacements:
+  - source:
+      kind: ConfigMap
+      name: codegen-shared-config
+      fieldPath: data.FRONTEND_HOST
+    targets:
+      - select: {kind: Ingress, name: codegen-main-ingress}
+        fieldPaths: [spec.rules.0.host, spec.tls.0.hosts.0]
+  - source:
+      kind: ConfigMap
+      name: codegen-shared-config
+      fieldPath: data.FRONTEND_WWW_HOST
+    targets:
+      - select: {kind: Ingress, name: codegen-main-ingress}
+        fieldPaths: [spec.rules.1.host, spec.tls.0.hosts.1]
+  - source:
+      kind: ConfigMap
+      name: codegen-shared-config
+      fieldPath: data.API_HOST
+    targets:
+      - select: {kind: Ingress, name: codegen-main-ingress}
+        fieldPaths: [spec.rules.2.host, spec.tls.0.hosts.2]

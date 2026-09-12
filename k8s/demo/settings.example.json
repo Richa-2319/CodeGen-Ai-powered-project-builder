@@ -1,0 +1,18 @@
+{
+  "frontend_host": "codegen.example.com",
+  "www_host": "www.codegen.example.com",
+  "api_host": "api.codegen.example.com",
+  "ingress_class": "nginx",
+  "ingress_controller_namespace": "ingress-nginx",
+  "tls_cluster_issuer": "letsencrypt-prod",
+  "tls_secret_name": "codegen-main-tls",
+  "image_pull_secret": "",
+  "images": {
+    "account-service": "registry.example.com/codegen-account-service@sha256:REPLACE_WITH_64_HEX_DIGEST",
+    "workspace-service": "registry.example.com/codegen-workspace-service@sha256:REPLACE_WITH_64_HEX_DIGEST",
+    "intelligence-service": "registry.example.com/codegen-intelligence-service@sha256:REPLACE_WITH_64_HEX_DIGEST",
+    "api-gateway": "registry.example.com/codegen-api-gateway@sha256:REPLACE_WITH_64_HEX_DIGEST",
+    "frontend": "registry.example.com/codegen-frontend@sha256:REPLACE_WITH_64_HEX_DIGEST"
+  },
+  "storage_class": "oci-bv"
+}

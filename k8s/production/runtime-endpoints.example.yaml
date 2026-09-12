@@ -1,0 +1,18 @@
+# Populate this Secret outside Git. Values may contain credentials, so do not
+# commit the real file. This example documents required production endpoints.
+apiVersion: v1
+kind: Secret
+metadata:
+  name: runtime-endpoints
+  namespace: codegen-core
+type: Opaque
+stringData:
+  ACCOUNT_DB_USERNAME: account_user
+  ACCOUNT_DB_URL: jdbc:postgresql://managed-postgres.example:5432/account_db
+  WORKSPACE_DB_USERNAME: workspace_user
+  WORKSPACE_DB_URL: jdbc:postgresql://managed-postgres.example:5432/workspace_db
+  INTELLIGENCE_DB_USERNAME: intelligence_user
+  INTELLIGENCE_DB_URL: jdbc:postgresql://managed-postgres.example:5432/intelligence_db
+  REDIS_URL: rediss://managed-redis.example:6379
+  KAFKA_BOOTSTRAP_SERVERS: managed-kafka.example:9092
+  OBJECT_STORAGE_URL: https://object-storage.example

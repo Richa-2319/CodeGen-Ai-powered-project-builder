@@ -1,0 +1,101 @@
+# k8s/services/intelligence-service.yaml
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: intelligence-service
+  namespace: codegen-core
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: intelligence-service
+  template:
+    metadata:
+      labels:
+        app: intelligence-service
+    spec:
+      containers:
+        - name: intelligence-service
+          image: docker.io/richak2319/codegen-intelligence-service:0.0.1
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 9030
+          envFrom:
+            - secretRef:
+                name: runtime-extra-config
+                optional: true
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: k8s
+            - name: DB_URL
+              value: jdbc:postgresql://pgvector:5432/intelligence_db
+            - name: DB_USERNAME
+              value: intelligence_user
+            - name: KAFKA_BOOTSTRAP_SERVERS
+              value: kafka:9092
+            - name: ACCOUNT_SERVICE_URI
+              value: http://account-service
+            - name: WORKSPACE_SERVICE_URI
+              value: http://workspace-service
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: app-secrets
+                  key: INTELLIGENCE_DB_PASSWORD
+            - name: AI_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: app-secrets
+                  key: AI_API_KEY
+            - name: JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: app-secrets
+                  key: JWT_SECRET
+            - name: INTERNAL_SERVICE_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: app-secrets
+                  key: INTERNAL_SERVICE_KEY
+          resources:
+            requests:
+              cpu: 100m
+              memory: 256Mi
+            limits:
+              cpu: 250m
+              memory: 512Mi
+          readinessProbe:
+            httpGet:
+              path: /intelligence/actuator/health/readiness
+              port: 9030
+            initialDelaySeconds: 90
+            periodSeconds: 15
+            timeoutSeconds: 5
+            failureThreshold: 3
+          startupProbe:
+            httpGet:
+              path: /intelligence/actuator/health/liveness
+              port: 9030
+            failureThreshold: 30
+            periodSeconds: 10
+            timeoutSeconds: 5
+          livenessProbe:
+            httpGet:
+              path: /intelligence/actuator/health/liveness
+              port: 9030
+            periodSeconds: 20
+            timeoutSeconds: 5
+            failureThreshold: 3
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: intelligence-service
+  namespace: codegen-core
+spec:
+  selector:
+    app: intelligence-service
+  ports:
+    - port: 80
+      targetPort: 9030

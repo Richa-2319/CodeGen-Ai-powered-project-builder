@@ -1,0 +1,45 @@
+spring:
+  application:
+    name: account-service
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/account_db}
+    username: ${DB_USERNAME:account_user}
+    password: ${DB_PASSWORD}
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+  kafka:
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
+
+server:
+  port: ${PORT:9050}
+  servlet:
+    context-path: /account
+  forward-headers-strategy: framework
+
+jwt:
+  secret-key: ${JWT_SECRET}
+
+internal:
+  service-key: ${INTERNAL_SERVICE_KEY}
+
+stripe:
+  api:
+    secret: ${STRIPE_API_SECRET}
+  webhook:
+    secret: ${STRIPE_WEBHOOK_SECRET}
+
+app:
+  frontend:
+    url: ${APP_FRONTEND_URL:https://codegen.example.com}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus
+  endpoint:
+    health:
+      probes:
+        enabled: true

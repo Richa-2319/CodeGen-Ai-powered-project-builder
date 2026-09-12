@@ -1,0 +1,96 @@
+name: Publish reviewed application images
+
+on:
+  workflow_dispatch:
+    inputs:
+      registry_namespace:
+        description: Docker Hub namespace authorized for these images
+        required: true
+        type: string
+      release_tag:
+        description: Unique release tag; deploy the resulting digests
+        required: true
+        type: string
+      platforms:
+        description: Match the architecture of the confirmed OKE workers
+        required: true
+        default: linux/amd64,linux/arm64
+        type: choice
+        options:
+          - linux/amd64,linux/arm64
+          - linux/amd64
+          - linux/arm64
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate publication target
+        env:
+          IMAGE_NAMESPACE: ${{ inputs.registry_namespace }}
+          RELEASE_TAG: ${{ inputs.release_tag }}
+        run: |
+          python3 - <<'PYVALIDATE'
+          import os, re
+          assert re.fullmatch(r"[a-z0-9][a-z0-9_-]*", os.environ["IMAGE_NAMESPACE"]), "Invalid Docker Hub namespace"
+          assert re.fullmatch(r"[A-Za-z0-9_][A-Za-z0-9_.-]{0,127}", os.environ["RELEASE_TAG"]), "Invalid release tag"
+          assert os.environ["RELEASE_TAG"] != "latest", "Use a unique release tag"
+          PYVALIDATE
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+          cache: maven
+      - name: Verify Java reactor
+        run: ./common-lib/mvnw --batch-mode --no-transfer-progress -f pom.xml verify
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20.19.1"
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - name: Verify frontend
+        working-directory: frontend
+        run: |
+          npm ci --ignore-scripts --no-audit --no-fund
+          npm run lint
+          npm test
+          npm run build
+
+  publish:
+    needs: verify
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      matrix:
+        module: [api-gateway, account-service, workspace-service, intelligence-service, frontend]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker/setup-qemu-action@v3
+      - uses: docker/setup-buildx-action@v3
+      - uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Publish application image
+        id: image
+        uses: docker/build-push-action@v6
+        with:
+          context: ${{ matrix.module == 'frontend' && './frontend' || '.' }}
+          file: ${{ matrix.module == 'frontend' && './frontend/Dockerfile' || './Dockerfile' }}
+          build-args: MODULE=${{ matrix.module }}
+          platforms: ${{ inputs.platforms }}
+          push: true
+          tags: ${{ inputs.registry_namespace }}/codegen-${{ matrix.module }}:${{ inputs.release_tag }}
+      - name: Record exact deployment image
+        env:
+          DEPLOYMENT_IMAGE: ${{ inputs.registry_namespace }}/codegen-${{ matrix.module }}@${{ steps.image.outputs.digest }}
+        run: printf '%s\n' "$DEPLOYMENT_IMAGE" >> "$GITHUB_STEP_SUMMARY"
+
+# Deploy separately against the explicitly selected OKE context and reviewed
+# render. This workflow never reads cloud credentials or deploys to a cluster.

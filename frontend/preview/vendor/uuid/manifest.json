@@ -1,0 +1,18 @@
+{
+  "package": "uuid",
+  "version": "11.1.0",
+  "assets": [
+    {
+      "path": "uuid.js",
+      "url": "https://cdn.jsdelivr.net/npm/uuid@11.1.0/+esm",
+      "sha256": "b8804287edf6045793743693f4c17be543ab71e26d65cbb00c1ce494dc101fb3",
+      "bytes": 10450
+    },
+    {
+      "path": "LICENSE.md",
+      "url": "https://cdn.jsdelivr.net/npm/uuid@11.1.0/LICENSE.md",
+      "sha256": "beaa6b04fb82e41dd2ad679e19e27953afb5999b1abbb455b6564e78ebfeb332",
+      "bytes": 1109
+    }
+  ]
+}

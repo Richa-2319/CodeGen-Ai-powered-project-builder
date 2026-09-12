@@ -1,0 +1,56 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: codegen-main-ingress
+  namespace: codegen-core
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/limit-rps: "10"
+    nginx.ingress.kubernetes.io/limit-connections: "20"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
+spec:
+  ingressClassName: "nginx"
+  tls:
+    - hosts:
+        - codegen.example.com
+        - www.codegen.example.com
+        - api.codegen.example.com
+      secretName: codegen-main-tls
+  rules:
+    # 1. Main Website Route (The Frontend!)
+    - host: "codegen.example.com"
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: codegen-frontend
+                port:
+                  number: 80
+
+    - host: "www.codegen.example.com"
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: codegen-frontend
+                port:
+                  number: 80
+
+    # 2. API Gateway Route. Preview ingress remains disabled until wildcard TLS
+    # and isolated runner infrastructure are provisioned.
+    - host: "api.codegen.example.com"
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: api-gateway
+                port:
+                  number: 80

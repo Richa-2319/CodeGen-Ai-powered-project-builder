@@ -1,0 +1,31 @@
+**/target/
+.idea/
+.vscode/
+.env
+.env.*
+!.env.example
+app-secrets.yaml
+runtime-endpoints.yaml
+*.pem
+*.key
+
+# Generated artifacts and local tooling
+**/node_modules/
+**/dist/
+**/__pycache__/
+*.pyc
+*.log
+*.zip
+*.tsbuildinfo
+.DS_Store
+
+# Cloud state and operator-specific configuration stay outside Git
+**/.terraform/
+*.tfstate*
+*.tfplan
+*.tfvars
+*.tfvars.json
+!example.tfvars.json
+kubeconfig*
+codegen-cloud-state/
+deployment/reports/

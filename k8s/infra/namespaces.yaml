@@ -1,0 +1,14 @@
+# k8s/infra/namespace.yaml
+
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: codegen-core
+
+---
+# to create a separate ns for previews
+
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: codegen-previews

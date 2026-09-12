@@ -1,0 +1,57 @@
+logging:
+  level:
+    org.springframework.cloud.gateway: INFO
+    reactor.netty.http.client: INFO
+
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      server:
+        webflux:
+          routes:
+            - id: account-service
+              uri: ${ACCOUNT_SERVICE_URI:http://localhost:9050}
+              predicates:
+                - Path=/account/**
+            - id: workspace-service
+              uri: ${WORKSPACE_SERVICE_URI:http://localhost:9020}
+              predicates:
+                - Path=/workspace/**
+            - id: intelligence-service
+              uri: ${INTELLIGENCE_SERVICE_URI:http://localhost:9030}
+              predicates:
+                - Path=/intelligence/**
+
+server:
+  port: ${PORT:8080}
+  forward-headers-strategy: framework
+
+jwt:
+  secretKey: ${JWT_SECRET}
+
+app:
+  cors:
+    allowed-origins: ${CORS_ALLOWED_ORIGINS:https://codegen.example.com}
+  security:
+    public-routes:
+      - /workspace/public/apps/*
+      - /account/auth/**
+      - /account/webhooks/**
+      - /actuator/health
+      - /actuator/health/**
+      - /actuator/info
+    blocked-routes:
+      - /internal/**
+      - /**/internal/**
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus
+  endpoint:
+    health:
+      probes:
+        enabled: true

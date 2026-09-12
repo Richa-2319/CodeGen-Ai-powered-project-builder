@@ -1,0 +1,123 @@
+# k8s/stateful/pgvector.yaml
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: pgvector-init
+  namespace: codegen-core
+data:
+  init.sh: |
+    #!/bin/bash
+    set -e
+
+    # Read passwords directly inside psql, and quote them as SQL literals.
+    # Shell expansion into SQL would break credentials containing apostrophes.
+    psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname postgres <<'EOSQL'
+      \getenv account_password ACCOUNT_DB_PASSWORD
+      \getenv workspace_password WORKSPACE_DB_PASSWORD
+      \getenv intelligence_password INTELLIGENCE_DB_PASSWORD
+      CREATE USER account_user WITH PASSWORD :'account_password';
+      CREATE USER workspace_user WITH PASSWORD :'workspace_password';
+      CREATE USER intelligence_user WITH PASSWORD :'intelligence_password';
+      CREATE DATABASE account_db OWNER account_user;
+      CREATE DATABASE workspace_db OWNER workspace_user;
+      CREATE DATABASE intelligence_db OWNER intelligence_user;
+    EOSQL
+
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: pgvector
+  namespace: codegen-core
+spec:
+  selector:
+    matchLabels:
+      app: pgvector
+  serviceName: pgvector
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: pgvector
+    spec:
+      containers:
+        - name: pgvector
+          # Current Flyway schemas use PostgreSQL types and no vector extension.
+          image: docker.io/library/postgres:16-alpine
+          ports:
+            - containerPort: 5432
+          env:
+            - name: PGDATA
+              value: /var/lib/postgresql/data/pgdata
+            - name: POSTGRES_USER
+              value: postgres
+            - name: POSTGRES_DB
+              value: postgres          # default db, required by the image
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: app-secrets
+                  key: POSTGRES_PASSWORD
+            - name: ACCOUNT_DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: app-secrets
+                  key: ACCOUNT_DB_PASSWORD
+            - name: WORKSPACE_DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: app-secrets
+                  key: WORKSPACE_DB_PASSWORD
+            - name: INTELLIGENCE_DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: app-secrets
+                  key: INTELLIGENCE_DB_PASSWORD
+          resources:
+            requests:
+              cpu: 100m
+              memory: 256Mi
+            limits:
+              cpu: 250m
+              memory: 512Mi
+          volumeMounts:
+            - name: pgdata
+              mountPath: /var/lib/postgresql/data
+            - name: initdb
+              mountPath: /docker-entrypoint-initdb.d
+          readinessProbe:
+            exec:
+              command: ["sh", "-c", "pg_isready -U postgres -d postgres"]
+            periodSeconds: 10
+          livenessProbe:
+            exec:
+              command: ["sh", "-c", "pg_isready -U postgres -d postgres"]
+            periodSeconds: 20
+      volumes:
+        - name: initdb
+          configMap:
+            name: pgvector-init
+            defaultMode: 0755         # must be executable for .sh files
+  volumeClaimTemplates:
+    - metadata:
+        name: pgdata
+      spec:
+        storageClassName: oci-bv
+        accessModes: [ReadWriteOnce]
+        resources:
+          requests:
+            storage: 50Gi
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: pgvector
+  namespace: codegen-core
+spec:
+  clusterIP: None   # headless — required for StatefulSet DNS
+  selector:
+    app: pgvector
+  ports:
+    - port: 5432

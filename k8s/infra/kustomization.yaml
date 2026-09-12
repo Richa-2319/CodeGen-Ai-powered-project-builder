@@ -1,0 +1,20 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - namespaces.yaml
+  - core-network-policies.yaml
+  - ingress.yaml
+  - pod-disruption-budgets.yaml
+configMapGenerator:
+  - name: codegen-shared-config
+    namespace: codegen-core
+    literals:
+      - FRONTEND_HOST=codegen.example.com
+      - FRONTEND_WWW_HOST=www.codegen.example.com
+      - API_HOST=api.codegen.example.com
+      - APP_FRONTEND_URL=https://codegen.example.com
+      - CORS_ALLOWED_ORIGINS=https://codegen.example.com,https://www.codegen.example.com
+      - PREVIEW_DOMAIN=previews.codegen.example.com
+      - PREVIEW_SCHEME=https
+      - PREVIEW_NAMESPACE=codegen-previews
+      - PROXY_PORT=443

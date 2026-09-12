@@ -1,0 +1,36 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+# Stateful manifests are deliberately excluded. Production must use managed or
+# operator-backed PostgreSQL, Kafka, Redis and object storage with backups.
+resources:
+  - ../infra
+  - ../services
+
+patches:
+  - path: managed-endpoints-patch.yaml
+
+# Keep every public ingress hostname tied to the generated shared configuration.
+# The ConfigMap hash also triggers a rollout when frontend/CORS settings change.
+replacements:
+  - source:
+      kind: ConfigMap
+      name: codegen-shared-config
+      fieldPath: data.FRONTEND_HOST
+    targets:
+      - select: {kind: Ingress, name: codegen-main-ingress}
+        fieldPaths: [spec.rules.0.host, spec.tls.0.hosts.0]
+  - source:
+      kind: ConfigMap
+      name: codegen-shared-config
+      fieldPath: data.FRONTEND_WWW_HOST
+    targets:
+      - select: {kind: Ingress, name: codegen-main-ingress}
+        fieldPaths: [spec.rules.1.host, spec.tls.0.hosts.1]
+  - source:
+      kind: ConfigMap
+      name: codegen-shared-config
+      fieldPath: data.API_HOST
+    targets:
+      - select: {kind: Ingress, name: codegen-main-ingress}
+        fieldPaths: [spec.rules.2.host, spec.tls.0.hosts.2]

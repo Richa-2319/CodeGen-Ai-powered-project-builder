@@ -1,0 +1,2 @@
+com.project.distributed_codegen.common_lib.error.SharedExceptionAutoConfiguration
+com.project.distributed_codegen.common_lib.security.SharedSecurityAutoConfiguration

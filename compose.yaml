@@ -1,0 +1,225 @@
+name: codegen
+
+x-java: &java
+  restart: unless-stopped
+  init: true
+  mem_limit: 768m
+  security_opt: [no-new-privileges:true]
+  cap_drop: [ALL]
+  logging:
+    driver: json-file
+    options: {max-size: "10m", max-file: "3"}
+
+x-auth: &auth
+  JWT_SECRET: ${JWT_SECRET:?Set JWT_SECRET (at least 32 bytes)}
+  INTERNAL_SERVICE_KEY: ${INTERNAL_SERVICE_KEY:?Set a separate INTERNAL_SERVICE_KEY}
+
+x-health: &health
+  interval: 20s
+  timeout: 10s
+  retries: 6
+  start_period: 120s
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    mem_limit: 768m
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}
+      ACCOUNT_DB_PASSWORD: ${ACCOUNT_DB_PASSWORD:?Set ACCOUNT_DB_PASSWORD}
+      WORKSPACE_DB_PASSWORD: ${WORKSPACE_DB_PASSWORD:?Set WORKSPACE_DB_PASSWORD}
+      INTELLIGENCE_DB_PASSWORD: ${INTELLIGENCE_DB_PASSWORD:?Set INTELLIGENCE_DB_PASSWORD}
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      - ./deployment/postgres-init.sh:/docker-entrypoint-initdb.d/01-codegen.sh:ro
+    healthcheck:
+      test: [CMD-SHELL, "pg_isready -U postgres -d postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+
+  kafka:
+    image: apache/kafka:3.9.1
+    restart: unless-stopped
+    mem_limit: 1g
+    environment:
+      KAFKA_NODE_ID: "1"
+      KAFKA_PROCESS_ROLES: broker,controller
+      KAFKA_LISTENERS: PLAINTEXT://:9092,CONTROLLER://:9093
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT
+      KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_CONTROLLER_QUORUM_VOTERS: 1@kafka:9093
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: "1"
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: "1"
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: "1"
+      KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: "0"
+      KAFKA_LOG_DIRS: /var/lib/kafka/data
+      KAFKA_LOG_RETENTION_HOURS: "24"
+      KAFKA_LOG_RETENTION_BYTES: "268435456"
+      KAFKA_HEAP_OPTS: -Xms256m -Xmx512m
+    volumes: [kafka-data:/var/lib/kafka/data]
+    healthcheck:
+      test: [CMD, /opt/kafka/bin/kafka-topics.sh, --bootstrap-server, localhost:9092, --list]
+      interval: 20s
+      timeout: 10s
+      retries: 12
+
+  redis:
+    image: redis:7.4.2-alpine
+    restart: unless-stopped
+    mem_limit: 256m
+    environment:
+      REDIS_PASSWORD: ${REDIS_PASSWORD:?Set REDIS_PASSWORD}
+    command: [sh, -c, 'exec redis-server --appendonly yes --maxmemory 128mb --maxmemory-policy allkeys-lru --requirepass "$$REDIS_PASSWORD"']
+    volumes: [redis-data:/data]
+    healthcheck:
+      test: [CMD-SHELL, 'REDISCLI_AUTH="$$REDIS_PASSWORD" redis-cli ping | grep -q PONG']
+      interval: 10s
+      timeout: 5s
+      retries: 12
+
+  minio:
+    image: minio/minio:RELEASE.2024-12-18T13-15-44Z
+    restart: unless-stopped
+    mem_limit: 512m
+    command: [server, /data]
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER:?Set MINIO_ROOT_USER}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD:?Set MINIO_ROOT_PASSWORD}
+    volumes: [minio-data:/data]
+
+  minio-init:
+    image: minio/mc:RELEASE.2024-11-21T17-21-54Z
+    restart: "no"
+    depends_on: [minio]
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER:?Set MINIO_ROOT_USER}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD:?Set MINIO_ROOT_PASSWORD}
+    entrypoint: ["/bin/sh", "-c"]
+    command:
+      - |
+        attempt=0
+        until mc alias set codegen http://minio:9000 "$$MINIO_ROOT_USER" "$$MINIO_ROOT_PASSWORD" >/dev/null 2>&1; do
+          attempt=$$((attempt + 1))
+          if [ "$$attempt" -ge 30 ]; then echo "Object storage initialization failed"; exit 1; fi
+          sleep 2
+        done
+        mc mb --ignore-existing codegen/projects
+
+  account-service:
+    <<: *java
+    build: {context: ., args: {MODULE: account-service}}
+    image: codegen/account-service:${CODEGEN_VERSION:-local}
+    environment:
+      <<: *auth
+      DB_URL: jdbc:postgresql://postgres:5432/account_db
+      DB_USERNAME: account_user
+      DB_PASSWORD: ${ACCOUNT_DB_PASSWORD:?Set ACCOUNT_DB_PASSWORD}
+      KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+      STRIPE_API_SECRET: ${STRIPE_API_SECRET:?Set STRIPE_API_SECRET or disabled for a non-billing demo}
+      STRIPE_WEBHOOK_SECRET: ${STRIPE_WEBHOOK_SECRET:?Set STRIPE_WEBHOOK_SECRET or disabled for a non-billing demo}
+      APP_FRONTEND_URL: ${APP_URL:-http://localhost:8088}
+    depends_on:
+      postgres: {condition: service_healthy}
+    healthcheck:
+      <<: *health
+      test: [CMD, java, -cp, /opt/health, Healthcheck, http://localhost:9050/account/actuator/health/readiness]
+
+  workspace-service:
+    <<: *java
+    build: {context: ., args: {MODULE: workspace-service}}
+    image: codegen/workspace-service:${CODEGEN_VERSION:-local}
+    environment:
+      <<: *auth
+      DB_URL: jdbc:postgresql://postgres:5432/workspace_db
+      DB_USERNAME: workspace_user
+      DB_PASSWORD: ${WORKSPACE_DB_PASSWORD:?Set WORKSPACE_DB_PASSWORD}
+      KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+      REDIS_URL: redis://redis:6379
+      SPRING_DATA_REDIS_PASSWORD: ${REDIS_PASSWORD:?Set REDIS_PASSWORD}
+      MINIO_URL: http://minio:9000
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER:?Set MINIO_ROOT_USER}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD:?Set MINIO_ROOT_PASSWORD}
+      ACCOUNT_SERVICE_URI: http://account-service:9050
+      PREVIEW_ENABLED: "false"
+      KUBERNETES_AUTH_TRYKUBECONFIG: "false"
+      KUBERNETES_AUTH_TRYSERVICEACCOUNT: "false"
+    depends_on:
+      postgres: {condition: service_healthy}
+      kafka: {condition: service_healthy}
+      redis: {condition: service_healthy}
+      minio-init: {condition: service_completed_successfully}
+      account-service: {condition: service_healthy}
+    healthcheck:
+      <<: *health
+      test: [CMD, java, -cp, /opt/health, Healthcheck, http://localhost:9020/workspace/actuator/health/readiness]
+
+  intelligence-service:
+    <<: *java
+    build: {context: ., args: {MODULE: intelligence-service}}
+    image: codegen/intelligence-service:${CODEGEN_VERSION:-local}
+    environment:
+      <<: *auth
+      DB_URL: jdbc:postgresql://postgres:5432/intelligence_db
+      DB_USERNAME: intelligence_user
+      DB_PASSWORD: ${INTELLIGENCE_DB_PASSWORD:?Set INTELLIGENCE_DB_PASSWORD}
+      KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+      ACCOUNT_SERVICE_URI: http://account-service:9050
+      WORKSPACE_SERVICE_URI: http://workspace-service:9020
+      AI_API_KEY: ${AI_API_KEY:?Set AI_API_KEY}
+      AI_BASE_URL: ${AI_BASE_URL:-https://api.openai.com}
+      AI_CHAT_COMPLETIONS_PATH: ${AI_CHAT_COMPLETIONS_PATH:-/v1/chat/completions}
+      AI_MODEL: ${AI_MODEL:-gpt-4o-mini}
+    depends_on:
+      postgres: {condition: service_healthy}
+      kafka: {condition: service_healthy}
+      account-service: {condition: service_healthy}
+      workspace-service: {condition: service_healthy}
+    healthcheck:
+      <<: *health
+      test: [CMD, java, -cp, /opt/health, Healthcheck, http://localhost:9030/intelligence/actuator/health/readiness]
+
+  api-gateway:
+    <<: *java
+    mem_limit: 512m
+    build: {context: ., args: {MODULE: api-gateway}}
+    image: codegen/api-gateway:${CODEGEN_VERSION:-local}
+    environment:
+      JWT_SECRET: ${JWT_SECRET:?Set JWT_SECRET}
+      ACCOUNT_SERVICE_URI: http://account-service:9050
+      WORKSPACE_SERVICE_URI: http://workspace-service:9020
+      INTELLIGENCE_SERVICE_URI: http://intelligence-service:9030
+      CORS_ALLOWED_ORIGINS: ${APP_URL:-http://localhost:8088}
+    depends_on:
+      account-service: {condition: service_healthy}
+      workspace-service: {condition: service_healthy}
+      intelligence-service: {condition: service_healthy}
+    healthcheck:
+      <<: *health
+      test: [CMD, java, -cp, /opt/health, Healthcheck, http://localhost:8080/actuator/health/readiness]
+
+  frontend:
+    build: {context: ./frontend}
+    image: codegen/frontend:${CODEGEN_VERSION:-local}
+    restart: unless-stopped
+    mem_limit: 128m
+    environment:
+      API_GATEWAY_UPSTREAM: http://api-gateway:8080
+    ports: ["127.0.0.1:${HTTP_PORT:-8088}:8080"]
+    depends_on:
+      api-gateway: {condition: service_healthy}
+    healthcheck:
+      test: [CMD, wget, -q, -O, /dev/null, http://127.0.0.1:8080/]
+      interval: 20s
+      timeout: 5s
+      retries: 6
+
+volumes:
+  postgres-data:
+  kafka-data:
+  redis-data:
+  minio-data:

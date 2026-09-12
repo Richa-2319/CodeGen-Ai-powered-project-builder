@@ -1,0 +1,54 @@
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: api-gateway
+  namespace: codegen-core
+spec:
+  minAvailable: 1
+  selector:
+    matchLabels:
+      app: api-gateway
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: account-service
+  namespace: codegen-core
+spec:
+  minAvailable: 1
+  selector:
+    matchLabels:
+      app: account-service
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: workspace-service
+  namespace: codegen-core
+spec:
+  minAvailable: 1
+  selector:
+    matchLabels:
+      app: workspace-service
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: intelligence-service
+  namespace: codegen-core
+spec:
+  minAvailable: 1
+  selector:
+    matchLabels:
+      app: intelligence-service
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: codegen-frontend
+  namespace: codegen-core
+spec:
+  minAvailable: 1
+  selector:
+    matchLabels:
+      app: codegen-frontend
