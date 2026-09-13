@@ -27,6 +27,10 @@ contents. Redis supports the optional server-preview routing components.
 Config Server and Eureka are retained in the source but are not required by
 the Compose or demo deployments.
 
+Explore the [illustrated architecture guide](docs/architecture/README.md) for
+all 12 diagrams, the complete project flow, and the editable
+[draw.io source](docs/architecture/diagrams/CodeGen-Architecture-and-Flows.drawio).
+
 For local startup and public HTTPS setup, follow
 [deployment/README.md](deployment/README.md). No publicly reachable demo
 endpoint is included in this repository.

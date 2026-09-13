@@ -1,0 +1,925 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mxfile host="app.diagrams.net" modified="2026-09-13T00:00:00.000Z" agent="Codex" version="24.7.17" type="device">
+  <diagram id="01-overview" name="01  CodeGen at a glance">
+    <mxGraphModel dx="1200" dy="1230" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1200" pageHeight="1230" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="01  CodeGen at a glance" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=top;strokeColor=none;fillColor=none;fontFamily=Arial;fontSize=31;fontStyle=1;fontColor=#23364b;" vertex="1" parent="1">
+          <mxGeometry x="60" y="30" width="1100" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="subtitle" value="The browser calls one gateway; each service owns a clear responsibility." style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=top;strokeColor=none;fillColor=none;fontFamily=Arial;fontSize=20;fontStyle=0;fontColor=#526278;" vertex="1" parent="1">
+          <mxGeometry x="60" y="80" width="1080" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-0" value="" edge="1" parent="1" source="node-browser" target="node-front" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;strokeWidth=2.6;strokeColor=#60778c;dashed=0;exitX=1;exitY=0.5;exitPerimeter=1;entryX=0;entryY=0.5;entryPerimeter=1;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-1" value="" edge="1" parent="1" source="node-front" target="node-gateway" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;strokeWidth=2.6;strokeColor=#60778c;dashed=0;exitX=1;exitY=0.5;exitPerimeter=1;entryX=0;entryY=0.5;entryPerimeter=1;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-2" value="" edge="1" parent="1" source="node-gateway" target="node-account" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;strokeWidth=2.6;strokeColor=#60778c;dashed=0;exitX=0.5;exitY=1;exitPerimeter=1;entryX=0.5;entryY=0;entryPerimeter=1;">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="980" y="365" />
+              <mxPoint x="220" y="365" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge-3" value="" edge="1" parent="1" source="node-gateway" target="node-workspace" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;strokeWidth=2.6;strokeColor=#60778c;dashed=0;exitX=0.5;exitY=1;exitPerimeter=1;entryX=0.5;entryY=0;entryPerimeter=1;">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="980" y="385" />
+              <mxPoint x="600" y="385" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge-4" value="" edge="1" parent="1" source="node-gateway" target="node-intel" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;strokeWidth=2.6;strokeColor=#60778c;dashed=0;exitX=0.5;exitY=1;exitPerimeter=1;entryX=0.5;entryY=0;entryPerimeter=1;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-5" value="" edge="1" parent="1" source="node-account" target="node-pg" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;strokeWidth=2.6;strokeColor=#60778c;dashed=0;exitX=0.5;exitY=1;exitPerimeter=1;entryX=0.5;entryY=0;entryPerimeter=1;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-6" value="" edge="1" parent="1" source="node-workspace" target="node-pg" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;strokeWidth=2.6;strokeColor=#60778c;dashed=0;exitX=0.5;exitY=1;exitPerimeter=1;entryX=0.5;entryY=0;entryPerimeter=1;">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="600" y="660" />
+              <mxPoint x="220" y="660" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge-7" value="" edge="1" parent="1" source="node-intel" target="node-pg" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;strokeWidth=2.6;strokeColor=#60778c;dashed=0;exitX=0.5;exitY=1;exitPerimeter=1;entryX=0.5;entryY=0;entryPerimeter=1;">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="980" y="640" />
+              <mxPoint x="220" y="640" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge-8" value="" edge="1" parent="1" source="node-workspace" target="node-minio" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;strokeWidth=2.6;strokeColor=#60778c;dashed=0;exitX=0.5;exitY=1;exitPerimeter=1;entryX=0.5;entryY=0;entryPerimeter=1;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-9" value="" edge="1" parent="1" source="node-intel" target="node-kafka" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;strokeWidth=2.6;strokeColor=#b78222;dashed=1;exitX=1;exitY=0.5;exitPerimeter=1;entryX=1;entryY=0.5;entryPerimeter=1;">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1165" y="510" />
+              <mxPoint x="1165" y="805" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge-10" value="" edge="1" parent="1" source="node-kafka" target="node-workspace" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;strokeWidth=2.6;strokeColor=#b78222;dashed=1;exitX=0;exitY=0.5;exitPerimeter=1;entryX=1;entryY=0.5;entryPerimeter=1;">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="790" y="805" />
+              <mxPoint x="790" y="510" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge-11" value="" edge="1" parent="1" source="node-intel" target="node-provider" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;strokeWidth=2.6;strokeColor=#60778c;dashed=0;exitX=1;exitY=0.5;exitPerimeter=1;entryX=1;entryY=0.5;entryPerimeter=1;">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1185" y="510" />
+              <mxPoint x="1185" y="1043" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="node-browser" value="&lt;div style=&quot;font-size:23px;font-weight:bold;line-height:28px&quot;&gt;User in a browser&lt;/div&gt;&lt;div style=&quot;margin-top:10px;font-size:21px;line-height:26px&quot;&gt;Sign in, build, edit, preview,&lt;br&gt;share and publish.&lt;/div&gt;" vertex="1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#eaf2ff;strokeColor=#3878c5;strokeWidth=1.8;fontColor=#23364b;fontFamily=Arial;align=left;verticalAlign=top;spacing=18;overflow=hidden;">
+          <mxGeometry x="60" y="150" width="320" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="node-front" value="&lt;div style=&quot;font-size:23px;font-weight:bold;line-height:28px&quot;&gt;React + nginx&lt;/div&gt;&lt;div style=&quot;margin-top:10px;font-size:21px;line-height:26px&quot;&gt;UI assets and a same-origin&lt;br&gt;proxy for all application API&lt;br&gt;paths.&lt;/div&gt;" vertex="1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#eaf2ff;strokeColor=#3878c5;strokeWidth=1.8;fontColor=#23364b;fontFamily=Arial;align=left;verticalAlign=top;spacing=18;overflow=hidden;">
+          <mxGeometry x="440" y="150" width="320" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="node-gateway" value="&lt;div style=&quot;font-size:23px;font-weight:bold;line-height:28px&quot;&gt;API gateway&lt;/div&gt;&lt;div style=&quot;margin-top:10px;font-size:21px;line-height:26px&quot;&gt;Routes /account, /workspace&lt;br&gt;and /intelligence; validates&lt;br&gt;JWTs.&lt;/div&gt;" vertex="1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#e8f6f1;strokeColor=#25866b;strokeWidth=1.8;fontColor=#23364b;fontFamily=Arial;align=left;verticalAlign=top;spacing=18;overflow=hidden;">
+          <mxGeometry x="820" y="150" width="320" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="node-account" value="&lt;div style=&quot;font-size:23px;font-weight:bold;line-height:28px&quot;&gt;Account service&lt;/div&gt;&lt;div style=&quot;margin-top:10px;font-size:21px;line-height:26px&quot;&gt;Users, password verification&lt;br&gt;and subscription/plan&lt;br&gt;information.&lt;/div&gt;" vertex="1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#e8f6f1;strokeColor=#25866b;strokeWidth=1.8;fontColor=#23364b;fontFamily=Arial;align=left;verticalAlign=top;spacing=18;overflow=hidden;">
+          <mxGeometry x="60" y="425" width="320" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="node-workspace" value="&lt;div style=&quot;font-size:23px;font-weight:bold;line-height:28px&quot;&gt;Workspace service&lt;/div&gt;&lt;div style=&quot;margin-top:10px;font-size:21px;line-height:26px&quot;&gt;Projects, roles, file access,&lt;br&gt;preview bundles and public&lt;br&gt;snapshots.&lt;/div&gt;" vertex="1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#e8f6f1;strokeColor=#25866b;strokeWidth=1.8;fontColor=#23364b;fontFamily=Arial;align=left;verticalAlign=top;spacing=18;overflow=hidden;">
+          <mxGeometry x="440" y="425" width="320" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="node-intel" value="&lt;div style=&quot;font-size:23px;font-weight:bold;line-height:28px&quot;&gt;Intelligence service&lt;/div&gt;&lt;div style=&quot;margin-top:10px;font-size:21px;line-height:26px&quot;&gt;Permission/quota checks,&lt;br&gt;model streaming, chat events&lt;br&gt;and usage.&lt;/div&gt;" vertex="1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#e8f6f1;strokeColor=#25866b;strokeWidth=1.8;fontColor=#23364b;fontFamily=Arial;align=left;verticalAlign=top;spacing=18;overflow=hidden;">
+          <mxGeometry x="820" y="425" width="320" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="node-pg" value="&lt;div style=&quot;font-size:23px;font-weight:bold;line-height:28px&quot;&gt;PostgreSQL&lt;/div&gt;&lt;div style=&quot;margin-top:10px;font-size:21px;line-height:26px&quot;&gt;Three service databases:&lt;br&gt;account, workspace and&lt;br&gt;intelligence.&lt;/div&gt;" vertex="1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#f1edfb;strokeColor=#8461b3;strokeWidth=1.8;fontColor=#23364b;fontFamily=Arial;align=left;verticalAlign=top;spacing=18;overflow=hidden;">
+          <mxGeometry x="60" y="720" width="320" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="node-minio" value="&lt;div style=&quot;font-size:23px;font-weight:bold;line-height:28px&quot;&gt;MinIO object storage&lt;/div&gt;&lt;div style=&quot;margin-top:10px;font-size:21px;line-height:26px&quot;&gt;Saved project source files.&lt;br&gt;Database rows contain object&lt;br&gt;keys.&lt;/div&gt;" vertex="1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#f1edfb;strokeColor=#8461b3;strokeWidth=1.8;fontColor=#23364b;fontFamily=Arial;align=left;verticalAlign=top;spacing=18;overflow=hidden;">
+          <mxGeometry x="440" y="720" width="320" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="node-kafka" value="&lt;div style=&quot;font-size:23px;font-weight:bold;line-height:28px&quot;&gt;Kafka message broker&lt;/div&gt;&lt;div style=&quot;margin-top:10px;font-size:21px;line-height:26px&quot;&gt;File storage request and&lt;br&gt;response topics join&lt;br&gt;Intelligence to Workspace.&lt;/div&gt;" vertex="1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#fff5dd;strokeColor=#b78222;strokeWidth=1.8;fontColor=#23364b;fontFamily=Arial;align=left;verticalAlign=top;spacing=18;overflow=hidden;">
+          <mxGeometry x="820" y="720" width="320" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="node-optional" value="&lt;div style=&quot;font-size:23px;font-weight:bold;line-height:28px&quot;&gt;Optional or disabled&lt;/div&gt;&lt;div style=&quot;margin-top:10px;font-size:18px;line-height:23px&quot;&gt;Redis + runner proxy: server&lt;br&gt;previews disabled. Config/Eureka&lt;br&gt;optional.&lt;/div&gt;" vertex="1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#f1f3f6;strokeColor=#7a8796;strokeWidth=1.8;fontColor=#23364b;fontFamily=Arial;align=left;verticalAlign=top;spacing=18;overflow=hidden;">
+          <mxGeometry x="60" y="980" width="320" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="node-common" value="&lt;div style=&quot;font-size:23px;font-weight:bold;line-height:28px&quot;&gt;common-lib&lt;/div&gt;&lt;div style=&quot;margin-top:10px;font-size:18px;line-height:23px&quot;&gt;Shared Java types, security, errors&lt;br&gt;and Kafka event contracts.&lt;/div&gt;" vertex="1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#f1f3f6;strokeColor=#7a8796;strokeWidth=1.8;fontColor=#23364b;fontFamily=Arial;align=left;verticalAlign=top;spacing=18;overflow=hidden;">
+          <mxGeometry x="440" y="980" width="320" height="125" as="geometry" />
+        </mxCell>
+        <mxCell id="node-provider" value="&lt;div style=&quot;font-size:23px;font-weight:bold;line-height:28px&quot;&gt;External AI provider&lt;/div&gt;&lt;div style=&quot;margin-top:10px;font-size:18px;line-height:23px&quot;&gt;Configured endpoint + model.&lt;br&gt;Model inference is separately&lt;br&gt;metered.&lt;/div&gt;" vertex="1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#fff5dd;strokeColor=#b78222;strokeWidth=1.8;fontColor=#23364b;fontFamily=Arial;align=left;verticalAlign=top;spacing=18;overflow=hidden;">
+          <mxGeometry x="820" y="980" width="320" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="footer" value="Blue: browser/UI | Green: application | Purple: durable data | Gold dashed arrows: asynchronous messages" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=top;strokeColor=none;fillColor=none;fontFamily=Arial;fontSize=18;fontStyle=0;fontColor=#526278;" vertex="1" parent="1">
+          <mxGeometry x="60" y="1184" width="1080" height="25" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="02-repository" name="02  Where to find the code">
+    <mxGraphModel dx="1200" dy="1120" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1200" pageHeight="1120" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="02  Where to find the code" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=top;strokeColor=none;fillColor=none;fontFamily=Arial;fontSize=31;fontStyle=1;fontColor=#23364b;" vertex="1" parent="1">
+          <mxGeometry x="60" y="30" width="1100" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="subtitle" value="A module map with the files that explain the system fastest." style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=top;strokeColor=none;fillColor=none;fontFamily=Arial;fontSize=20;fontStyle=0;fontColor=#526278;" vertex="1" parent="1">
+          <mxGeometry x="60" y="80" width="1080" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="node-root" value="&lt;div style=&quot;font-size:23px;font-weight:bold;line-height:28px&quot;&gt;Repository root&lt;/div&gt;&lt;div style=&quot;margin-top:10px;font-size:21px;line-height:26px&quot;&gt;pom.xml: Java reactor&lt;br&gt;Dockerfile: backend image&lt;br&gt;compose*.yaml: local/HTTPS&lt;/div&gt;" vertex="1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#f1f3f6;strokeColor=#7a8796;strokeWidth=1.8;fontColor=#23364b;fontFamily=Arial;align=left;verticalAlign=top;spacing=18;overflow=hidden;">
+          <mxGeometry x="60" y="160" width="320" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="node-frontend" value="&lt;div style=&quot;font-size:23px;font-weight:bold;line-height:28px&quot;&gt;frontend/&lt;/div&gt;&lt;div style=&quot;margin-top:10px;font-size:20px;line-height:25px&quot;&gt;src/pages: routes and editor&lt;br&gt;src/components: dialogs/UI&lt;br&gt;src/lib: API and stream parsing&lt;/div&gt;" vertex="1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#eaf2ff;strokeColor=#3878c5;strokeWidth=1.8;fontColor=#23364b;fontFamily=Arial;align=left;verticalAlign=top;spacing=18;overflow=hidden;">
+          <mxGeometry x="440" y="160" width="320" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="node-preview" value="&lt;div style=&quot;font-size:23px;font-weight:bold;line-height:28px&quot;&gt;frontend/preview/&lt;/div&gt;&lt;div style=&quot;margin-top:10px;font-size:21px;line-height:26px&quot;&gt;runtime.ts: browser compiler&lt;br&gt;vendor/uuid: pinned package&lt;br&gt;../scripts/: asset build&lt;/div&gt;" vertex="1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#eaf2ff;strokeColor=#3878c5;strokeWidth=1.8;fontColor=#23364b;fontFamily=Arial;align=left;verticalAlign=top;spacing=18;overflow=hidden;">
+          <mxGeometry x="820" y="160" width="320" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="node-account" value="&lt;div style=&quot;font-size:23px;font-weight:bold;line-height:28px&quot;&gt;account-service/&lt;/div&gt;&lt;div style=&quot;margin-top:10px;font-size:21px;line-height:26px&quot;&gt;AuthController&lt;br&gt;AuthServiceImpl&lt;br&gt;SubscriptionServiceImpl&lt;/div&gt;" vertex="1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#e8f6f1;strokeColor=#25866b;strokeWidth=1.8;fontColor=#23364b;fontFamily=Arial;align=left;verticalAlign=top;spacing=18;overflow=hidden;">
+          <mxGeometry x="60" y="425" width="320" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="node-workspace" value="&lt;div style=&quot;font-size:23px;font-weight:bold;line-height:28px&quot;&gt;workspace-service/&lt;/div&gt;&lt;div style=&quot;margin-top:10px;font-size:20px;line-height:25px&quot;&gt;Project/Member/File controllers&lt;br&gt;PublicationService&lt;br&gt;PreviewSnapshotService&lt;/div&gt;" vertex="1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#e8f6f1;strokeColor=#25866b;strokeWidth=1.8;fontColor=#23364b;fontFamily=Arial;align=left;verticalAlign=top;spacing=18;overflow=hidden;">
+          <mxGeometry x="440" y="425" width="320" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="node-intel" value="&lt;div style=&quot;font-size:23px;font-weight:bold;line-height:28px&quot;&gt;intelligence-service/&lt;/div&gt;&lt;div style=&quot;margin-top:10px;font-size:19px;line-height:24px&quot;&gt;ChatController&lt;br&gt;AiGenerationServiceImpl&lt;br&gt;Kafka request/response&lt;br&gt;handlers&lt;/div&gt;" vertex="1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#e8f6f1;strokeColor=#25866b;strokeWidth=1.8;fontColor=#23364b;fontFamily=Arial;align=left;verticalAlign=top;spacing=18;overflow=hidden;">
+          <mxGeometry x="820" y="425" width="320" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="node-gateway" value="&lt;div style=&quot;font-size:23px;font-weight:bold;line-height:28px&quot;&gt;api-gateway/&lt;/div&gt;&lt;div style=&quot;margin-top:10px;font-size:19px;line-height:24px&quot;&gt;Routes + GatewayJwtAuthFilter&lt;br&gt;CORS configuration&lt;br&gt;common-lib/ supplies shared&lt;br&gt;code&lt;/div&gt;" vertex="1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#e8f6f1;strokeColor=#25866b;strokeWidth=1.8;fontColor=#23364b;fontFamily=Arial;align=left;verticalAlign=top;spacing=18;overflow=hidden;">
+          <mxGeometry x="60" y="690" width="320" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="node-infra" value="&lt;div style=&quot;font-size:23px;font-weight:bold;line-height:28px&quot;&gt;deployment/ and k8s/&lt;/div&gt;&lt;div style=&quot;margin-top:10px;font-size:20px;line-height:25px&quot;&gt;OKE Terraform, registry helper&lt;br&gt;Compose initialization/smokes&lt;br&gt;Demo + production overlays&lt;/div&gt;" vertex="1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#f1edfb;strokeColor=#8461b3;strokeWidth=1.8;fontColor=#23364b;fontFamily=Arial;align=left;verticalAlign=top;spacing=18;overflow=hidden;">
+          <mxGeometry x="440" y="690" width="320" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="node-ci" value="&lt;div style=&quot;font-size:23px;font-weight:bold;line-height:28px&quot;&gt;Build and optional&lt;br&gt;modules&lt;/div&gt;&lt;div style=&quot;margin-top:10px;font-size:18px;line-height:23px&quot;&gt;.github/workflows: CI/images&lt;br&gt;config-service: optional Config&lt;br&gt;discovery-service: optional Eureka&lt;/div&gt;" vertex="1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#f1f3f6;strokeColor=#7a8796;strokeWidth=1.8;fontColor=#23364b;fontFamily=Arial;align=left;verticalAlign=top;spacing=18;overflow=hidden;">
+          <mxGeometry x="820" y="690" width="320" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="label0" value="UI AND LOCAL ENTRY POINTS" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=top;strokeColor=none;fillColor=none;fontFamily=Arial;fontSize=17;fontStyle=0;fontColor=#526278;" vertex="1" parent="1">
+          <mxGeometry x="60" y="115" width="1080" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="label1" value="BUSINESS SERVICES" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=top;strokeColor=none;fillColor=none;fontFamily=Arial;fontSize=17;fontStyle=0;fontColor=#526278;" vertex="1" parent="1">
+          <mxGeometry x="60" y="380" width="1080" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="label2" value="ROUTING, DELIVERY AND OPTIONAL MODULES" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=top;strokeColor=none;fillColor=none;fontFamily=Arial;fontSize=17;fontStyle=0;fontColor=#526278;" vertex="1" parent="1">
+          <mxGeometry x="60" y="645" width="1080" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="footer" value="Java module convention: controller -&amp;gt; service -&amp;gt; repository/entity; resources contain configuration and Flyway migrations." style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=top;strokeColor=none;fillColor=none;fontFamily=Arial;fontSize=18;fontStyle=0;fontColor=#526278;" vertex="1" parent="1">
+          <mxGeometry x="60" y="1074" width="1080" height="25" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="03-authentication" name="03  Signup, login and authenticated requests">
+    <mxGraphModel dx="1200" dy="1030" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1200" pageHeight="1030" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="03  Signup, login and authenticated requests" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=top;strokeColor=none;fillColor=none;fontFamily=Arial;fontSize=31;fontStyle=1;fontColor=#23364b;" vertex="1" parent="1">
+          <mxGeometry x="60" y="30" width="1100" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="subtitle" value="A user identity is created once, then checked again on protected requests." style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=top;strokeColor=none;fillColor=none;fontFamily=Arial;fontSize=20;fontStyle=0;fontColor=#526278;" vertex="1" parent="1">
+          <mxGeometry x="60" y="80" width="1080" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-0" value="" edge="1" parent="1" source="node-1" target="node-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;strokeWidth=2.6;strokeColor=#60778c;dashed=0;exitX=1;exitY=0.5;exitPerimeter=1;entryX=0;entryY=0.5;entryPerimeter=1;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-1" value="" edge="1" parent="1" source="node-2" target="node-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;strokeWidth=2.6;strokeColor=#60778c;dashed=0;exitX=1;exitY=0.5;exitPerimeter=1;entryX=0;entryY=0.5;entryPerimeter=1;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-2" value="" edge="1" parent="1" source="node-3" target="node-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;strokeWidth=2.6;strokeColor=#60778c;dashed=0;exitX=0.5;exitY=1;exitPerimeter=1;entryX=0.5;entryY=0;entryPerimeter=1;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-3" value="" edge="1" parent="1" source="node-4" target="node-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;strokeWidth=2.6;strokeColor=#60778c;dashed=0;exitX=0;exitY=0.5;exitPerimeter=1;entryX=1;entryY=0.5;entryPerimeter=1;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-4" value="" edge="1" parent="1" source="node-5" target="node-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;strokeWidth=2.6;strokeColor=#60778c;dashed=0;exitX=0;exitY=0.5;exitPerimeter=1;entryX=1;entryY=0.5;entryPerimeter=1;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="node-1" value="&lt;div style=&quot;font-size:23px;font-weight:bold;line-height:28px&quot;&gt;01 Use the login form&lt;/div&gt;&lt;div style=&quot;margin-top:10px;font-size:21px;line-height:26px&quot;&gt;The browser sends signup or&lt;br&gt;login data to /account/auth/.&lt;/div&gt;" vertex="1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#eaf2ff;strokeColor=#3878c5;strokeWidth=1.8;fontColor=#23364b;fontFamily=Arial;align=left;verticalAlign=top;spacing=18;overflow=hidden;">
+          <mxGeometry x="60" y="160" width="320" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="node-2" value="&lt;div style=&quot;font-size:23px;font-weight:bold;line-height:28px&quot;&gt;02 Pass the public route&lt;/div&gt;&lt;div style=&quot;margin-top:10px;font-size:21px;line-height:26px&quot;&gt;nginx forwards to the&lt;br&gt;gateway; signup/login do not&lt;br&gt;need a JWT.&lt;/div&gt;" vertex="1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#e8f6f1;strokeColor=#25866b;strokeWidth=1.8;fontColor=#23364b;fontFamily=Arial;align=left;verticalAlign=top;spacing=18;overflow=hidden;">
+          <mxGeometry x="440" y="160" width="320" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="node-3" value="&lt;div style=&quot;font-size:23px;font-weight:bold;line-height:28px&quot;&gt;03 Check the account&lt;/div&gt;&lt;div style=&quot;margin-top:10px;font-size:21px;line-height:26px&quot;&gt;Account service hashes a&lt;br&gt;new password or verifies an&lt;br&gt;existing user.&lt;/div&gt;" vertex="1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#e8f6f1;strokeColor=#25866b;strokeWidth=1.8;fontColor=#23364b;fontFamily=Arial;align=left;verticalAlign=top;spacing=18;overflow=hidden;">
+          <mxGeometry x="820" y="160" width="320" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="node-4" value="&lt;div style=&quot;font-size:23px;font-weight:bold;line-height:28px&quot;&gt;04 Return a signed JWT&lt;/div&gt;&lt;div style=&quot;margin-top:10px;font-size:21px;line-height:26px&quot;&gt;Account service returns the&lt;br&gt;token and a small user&lt;br&gt;profile.&lt;/div&gt;" vertex="1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#e8f6f1;strokeColor=#25866b;strokeWidth=1.8;fontColor=#23364b;fontFamily=Arial;align=left;verticalAlign=top;spacing=18;overflow=hidden;">
+          <mxGeometry x="820" y="415" width="320" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="node-5" value="&lt;div style=&quot;font-size:23px;font-weight:bold;line-height:28px&quot;&gt;05 Remember the login&lt;/div&gt;&lt;div style=&quot;margin-top:10px;font-size:21px;line-height:26px&quot;&gt;The frontend stores&lt;br&gt;authentication state in&lt;br&gt;browser localStorage.&lt;/div&gt;" vertex="1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#eaf2ff;strokeColor=#3878c5;strokeWidth=1.8;fontColor=#23364b;fontFamily=Arial;align=left;verticalAlign=top;spacing=18;overflow=hidden;">
+          <mxGeometry x="440" y="415" width="320" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="node-6" value="&lt;div style=&quot;font-size:23px;font-weight:bold;line-height:28px&quot;&gt;06 Call protected APIs&lt;/div&gt;&lt;div style=&quot;margin-top:10px;font-size:21px;line-height:26px&quot;&gt;Bearer JWT -&amp;gt; gateway -&amp;gt;&lt;br&gt;service security -&amp;gt; project&lt;br&gt;permissions.&lt;/div&gt;" vertex="1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#e8f6f1;strokeColor=#25866b;strokeWidth=1.8;fontColor=#23364b;fontFamily=Arial;align=left;verticalAlign=top;spacing=18;overflow=hidden;">
+          <mxGeometry x="60" y="415" width="320" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="node-note0" value="&lt;div style=&quot;font-size:23px;font-weight:bold;line-height:28px&quot;&gt;Internal requests&lt;/div&gt;&lt;div style=&quot;margin-top:10px;font-size:20px;line-height:25px&quot;&gt;Feign forwards user identity&lt;br&gt;and the internal service header.&lt;/div&gt;" vertex="1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#e8f6f1;strokeColor=#25866b;strokeWidth=1.8;fontColor=#23364b;fontFamily=Arial;align=left;verticalAlign=top;spacing=18;overflow=hidden;">
+          <mxGeometry x="60" y="700" width="320" height="165" as="geometry" />
+        </mxCell>
+        <mxCell id="node-note1" value="&lt;div style=&quot;font-size:23px;font-weight:bold;line-height:28px&quot;&gt;Public exceptions&lt;/div&gt;&lt;div style=&quot;margin-top:10px;font-size:20px;line-height:25px&quot;&gt;Authentication, published-app&lt;br&gt;reads and configured health&lt;br&gt;routes.&lt;/div&gt;" vertex="1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#eaf2ff;strokeColor=#3878c5;strokeWidth=1.8;fontColor=#23364b;fontFamily=Arial;align=left;verticalAlign=top;spacing=18;overflow=hidden;">
+          <mxGeometry x="440" y="700" width="320" height="165" as="geometry" />
+        </mxCell>
+        <mxCell id="node-note2" value="&lt;div style=&quot;font-size:23px;font-weight:bold;line-height:28px&quot;&gt;External internal paths&lt;/div&gt;&lt;div style=&quot;margin-top:10px;font-size:20px;line-height:25px&quot;&gt;The gateway blocks /internal&lt;br&gt;routes from browser callers.&lt;/div&gt;" vertex="1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#fff0eb;strokeColor=#bd6142;strokeWidth=1.8;fontColor=#23364b;fontFamily=Arial;align=left;verticalAlign=top;spacing=18;overflow=hidden;">
+          <mxGeometry x="820" y="700" width="320" height="165" as="geometry" />
+        </mxCell>
+        <mxCell id="footer" value="JWT = signed user identity. A service key identifies internal callers; it does not replace project permissions." style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=top;strokeColor=none;fillColor=none;fontFamily=Arial;fontSize=18;fontStyle=0;fontColor=#526278;" vertex="1" parent="1">
+          <mxGeometry x="60" y="984" width="1080" height="25" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="04-project-lifecycle" name="04  Create a project and manage its lifecycle">
+    <mxGraphModel dx="1200" dy="1030" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1200" pageHeight="1030" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="04  Create a project and manage its lifecycle" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=top;strokeColor=none;fillColor=none;fontFamily=Arial;fontSize=31;fontStyle=1;fontColor=#23364b;" vertex="1" parent="1">
+          <mxGeometry x="60" y="30" width="1100" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="subtitle" value="Workspace owns project records; Account owns plan limits." style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=top;strokeColor=none;fillColor=none;fontFamily=Arial;fontSize=20;fontStyle=0;fontColor=#526278;" vertex="1" parent="1">
+          <mxGeometry x="60" y="80" width="1080" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-0" value="" edge="1" parent="1" source="node-1" target="node-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;strokeWidth=2.6;strokeColor=#60778c;dashed=0;exitX=1;exitY=0.5;exitPerimeter=1;entryX=0;entryY=0.5;entryPerimeter=1;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-1" value="" edge="1" parent="1" source="node-2" target="node-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;strokeWidth=2.6;strokeColor=#60778c;dashed=0;exitX=1;exitY=0.5;exitPerimeter=1;entryX=0;entryY=0.5;entryPerimeter=1;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-2" value="" edge="1" parent="1" source="node-3" target="node-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;strokeWidth=2.6;strokeColor=#60778c;dashed=0;exitX=0.5;exitY=1;exitPerimeter=1;entryX=0.5;entryY=0;entryPerimeter=1;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-3" value="" edge="1" parent="1" source="node-4" target="node-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;strokeWidth=2.6;strokeColor=#60778c;dashed=0;exitX=0;exitY=0.5;exitPerimeter=1;entryX=1;entryY=0.5;entryPerimeter=1;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-4" value="" edge="1" parent="1" source="node-5" target="node-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;strokeWidth=2.6;strokeColor=#60778c;dashed=0;exitX=0;exitY=0.5;exitPerimeter=1;entryX=1;entryY=0.5;entryPerimeter=1;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="node-1" value="&lt;div style=&quot;font-size:23px;font-weight:bold;line-height:28px&quot;&gt;01 Create from&lt;br&gt;dashboard&lt;/div&gt;&lt;div style=&quot;margin-top:10px;font-size:19px;line-height:24px&quot;&gt;POST /workspace/projects with&lt;br&gt;the project name and user JWT.&lt;/div&gt;" vertex="1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#eaf2ff;strokeColor=#3878c5;strokeWidth=1.8;fontColor=#23364b;fontFamily=Arial;align=left;verticalAlign=top;spacing=18;overflow=hidden;">
+          <mxGeometry x="60" y="160" width="320" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="node-2" value="&lt;div style=&quot;font-size:23px;font-weight:bold;line-height:28px&quot;&gt;02 Enter Workspace&lt;/div&gt;&lt;div style=&quot;margin-top:10px;font-size:21px;line-height:26px&quot;&gt;The authenticated service&lt;br&gt;resolves the current user.&lt;/div&gt;" vertex="1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#e8f6f1;strokeColor=#25866b;strokeWidth=1.8;fontColor=#23364b;fontFamily=Arial;align=left;verticalAlign=top;spacing=18;overflow=hidden;">
+          <mxGeometry x="440" y="160" width="320" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="node-3" value="&lt;div style=&quot;font-size:23px;font-weight:bold;line-height:28px&quot;&gt;03 Ask Account for limits&lt;/div&gt;&lt;div style=&quot;margin-top:10px;font-size:21px;line-height:26px&quot;&gt;An internal Feign request&lt;br&gt;retrieves the current&lt;br&gt;subscribed plan.&lt;/div&gt;" vertex="1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#e8f6f1;strokeColor=#25866b;strokeWidth=1.8;fontColor=#23364b;fontFamily=Arial;align=left;verticalAlign=top;spacing=18;overflow=hidden;">
+          <mxGeometry x="820" y="160" width="320" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="node-4" value="&lt;div style=&quot;font-size:23px;font-weight:bold;line-height:28px&quot;&gt;04 Check owned projects&lt;/div&gt;&lt;div style=&quot;margin-top:10px;font-size:21px;line-height:26px&quot;&gt;Compare the owner count&lt;br&gt;with maxProjects; reject&lt;br&gt;when full.&lt;/div&gt;" vertex="1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#e8f6f1;strokeColor=#25866b;strokeWidth=1.8;fontColor=#23364b;fontFamily=Arial;align=left;verticalAlign=top;spacing=18;overflow=hidden;">
+          <mxGeometry x="820" y="415" width="320" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="node-5" value="&lt;div style=&quot;font-size:23px;font-weight:bold;line-height:28px&quot;&gt;05 Save project + owner&lt;/div&gt;&lt;div style=&quot;margin-top:10px;font-size:21px;line-height:26px&quot;&gt;One workspace transaction&lt;br&gt;stores the project and&lt;br&gt;OWNER membership.&lt;/div&gt;" vertex="1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#f1edfb;strokeColor=#8461b3;strokeWidth=1.8;fontColor=#23364b;fontFamily=Arial;align=left;verticalAlign=top;spacing=18;overflow=hidden;">
+          <mxGeometry x="440" y="415" width="320" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="node-6" value="&lt;div style=&quot;font-size:23px;font-weight:bold;line-height:28px&quot;&gt;06 Open the editor&lt;/div&gt;&lt;div style=&quot;margin-top:10px;font-size:21px;line-height:26px&quot;&gt;Return the project ID and&lt;br&gt;role; the dashboard lists&lt;br&gt;accessible projects.&lt;/div&gt;" vertex="1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#eaf2ff;strokeColor=#3878c5;strokeWidth=1.8;fontColor=#23364b;fontFamily=Arial;align=left;verticalAlign=top;spacing=18;overflow=hidden;">
+          <mxGeometry x="60" y="415" width="320" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="node-note0" value="&lt;div style=&quot;font-size:23px;font-weight:bold;line-height:28px&quot;&gt;Read and rename&lt;/div&gt;&lt;div style=&quot;margin-top:10px;font-size:20px;line-height:25px&quot;&gt;Members can read; Owner and&lt;br&gt;Editor can rename and edit.&lt;/div&gt;" vertex="1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#e8f6f1;strokeColor=#25866b;strokeWidth=1.8;fontColor=#23364b;fontFamily=Arial;align=left;verticalAlign=top;spacing=18;overflow=hidden;">
+          <mxGeometry x="60" y="700" width="320" height="165" as="geometry" />
+        </mxCell>
+        <mxCell id="node-note1" value="&lt;div style=&quot;font-size:23px;font-weight:bold;line-height:28px&quot;&gt;Delete = soft delete&lt;/div&gt;&lt;div style=&quot;margin-top:10px;font-size:20px;line-height:25px&quot;&gt;deletedAt hides the project; it&lt;br&gt;also disables future public app&lt;br&gt;reads.&lt;/div&gt;" vertex="1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#fff0eb;strokeColor=#bd6142;strokeWidth=1.8;fontColor=#23364b;fontFamily=Arial;align=left;verticalAlign=top;spacing=18;overflow=hidden;">
+          <mxGeometry x="440" y="700" width="320" height="165" as="geometry" />
+        </mxCell>
+        <mxCell id="node-note2" value="&lt;div style=&quot;font-size:23px;font-weight:bold;line-height:28px&quot;&gt;Download ZIP&lt;/div&gt;&lt;div style=&quot;margin-top:10px;font-size:20px;line-height:25px&quot;&gt;Workspace streams file&lt;br&gt;contents from MinIO with path&lt;br&gt;and size checks.&lt;/div&gt;" vertex="1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#f1edfb;strokeColor=#8461b3;strokeWidth=1.8;fontColor=#23364b;fontFamily=Arial;align=left;verticalAlign=top;spacing=18;overflow=hidden;">
+          <mxGeometry x="820" y="700" width="320" height="165" as="geometry" />
+        </mxCell>
+        <mxCell id="footer" value="Creating a project creates metadata. The source files arrive through generation or an authorized file save." style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=top;strokeColor=none;fillColor=none;fontFamily=Arial;fontSize=18;fontStyle=0;fontColor=#526278;" vertex="1" parent="1">
+          <mxGeometry x="60" y="984" width="1080" height="25" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="05-ai-generation" name="05  AI generation and live browser updates">
+    <mxGraphModel dx="1200" dy="1030" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1200" pageHeight="1030" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="05  AI generation and live browser updates" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=top;strokeColor=none;fillColor=none;fontFamily=Arial;fontSize=31;fontStyle=1;fontColor=#23364b;" vertex="1" parent="1">
+          <mxGeometry x="60" y="30" width="1100" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="subtitle" value="Streaming text and durable file delivery are different parts of the request." style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=top;strokeColor=none;fillColor=none;fontFamily=Arial;fontSize=20;fontStyle=0;fontColor=#526278;" vertex="1" parent="1">
+          <mxGeometry x="60" y="80" width="1080" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-0" value="" edge="1" parent="1" source="node-1" target="node-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;strokeWidth=2.6;strokeColor=#60778c;dashed=0;exitX=1;exitY=0.5;exitPerimeter=1;entryX=0;entryY=0.5;entryPerimeter=1;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-1" value="" edge="1" parent="1" source="node-2" target="node-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;strokeWidth=2.6;strokeColor=#60778c;dashed=0;exitX=1;exitY=0.5;exitPerimeter=1;entryX=0;entryY=0.5;entryPerimeter=1;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-2" value="" edge="1" parent="1" source="node-3" target="node-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;strokeWidth=2.6;strokeColor=#60778c;dashed=0;exitX=0.5;exitY=1;exitPerimeter=1;entryX=0.5;entryY=0;entryPerimeter=1;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-3" value="" edge="1" parent="1" source="node-4" target="node-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;strokeWidth=2.6;strokeColor=#60778c;dashed=0;exitX=0;exitY=0.5;exitPerimeter=1;entryX=1;entryY=0.5;entryPerimeter=1;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-4" value="" edge="1" parent="1" source="node-5" target="node-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;strokeWidth=2.6;strokeColor=#60778c;dashed=0;exitX=0;exitY=0.5;exitPerimeter=1;entryX=1;entryY=0.5;entryPerimeter=1;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-5" value="" edge="1" parent="1" source="node-6" target="node-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;strokeWidth=2.6;strokeColor=#60778c;dashed=0;exitX=0.5;exitY=1;exitPerimeter=1;entryX=0.5;entryY=0;entryPerimeter=1;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-6" value="" edge="1" parent="1" source="node-7" target="node-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;strokeWidth=2.6;strokeColor=#60778c;dashed=0;exitX=1;exitY=0.5;exitPerimeter=1;entryX=0;entryY=0.5;entryPerimeter=1;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-7" value="" edge="1" parent="1" source="node-8" target="node-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;strokeWidth=2.6;strokeColor=#60778c;dashed=0;exitX=1;exitY=0.5;exitPerimeter=1;entryX=0;entryY=0.5;entryPerimeter=1;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="node-1" value="&lt;div style=&quot;font-size:23px;font-weight:bold;line-height:28px&quot;&gt;01 Send a prompt&lt;/div&gt;&lt;div style=&quot;margin-top:10px;font-size:21px;line-height:26px&quot;&gt;POST&lt;br&gt;/intelligence/chat/stream with&lt;br&gt;projectId and message.&lt;/div&gt;" vertex="1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#eaf2ff;strokeColor=#3878c5;strokeWidth=1.8;fontColor=#23364b;fontFamily=Arial;align=left;verticalAlign=top;spacing=18;overflow=hidden;">
+          <mxGeometry x="60" y="160" width="320" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="node-2" value="&lt;div style=&quot;font-size:23px;font-weight:bold;line-height:28px&quot;&gt;02 Verify project access&lt;/div&gt;&lt;div style=&quot;margin-top:10px;font-size:21px;line-height:26px&quot;&gt;Intelligence asks Workspace&lt;br&gt;whether this user can EDIT.&lt;/div&gt;" vertex="1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#e8f6f1;strokeColor=#25866b;strokeWidth=1.8;fontColor=#23364b;fontFamily=Arial;align=left;verticalAlign=top;spacing=18;overflow=hidden;">
+          <mxGeometry x="440" y="160" width="320" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="node-3" value="&lt;div style=&quot;font-size:23px;font-weight:bold;line-height:28px&quot;&gt;03 Check daily allowance&lt;/div&gt;&lt;div style=&quot;margin-top:10px;font-size:21px;line-height:26px&quot;&gt;Read Account plan and&lt;br&gt;today&amp;#x27;s intelligence usage&lt;br&gt;before starting.&lt;/div&gt;" vertex="1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#e8f6f1;strokeColor=#25866b;strokeWidth=1.8;fontColor=#23364b;fontFamily=Arial;align=left;verticalAlign=top;spacing=18;overflow=hidden;">
+          <mxGeometry x="820" y="160" width="320" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="node-4" value="&lt;div style=&quot;font-size:23px;font-weight:bold;line-height:28px&quot;&gt;04 Prepare the session&lt;/div&gt;&lt;div style=&quot;margin-top:10px;font-size:21px;line-height:26px&quot;&gt;Find/create a project-user&lt;br&gt;chat session; retain caller&lt;br&gt;identity for async work.&lt;/div&gt;" vertex="1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#f1edfb;strokeColor=#8461b3;strokeWidth=1.8;fontColor=#23364b;fontFamily=Arial;align=left;verticalAlign=top;spacing=18;overflow=hidden;">
+          <mxGeometry x="820" y="415" width="320" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="node-5" value="&lt;div style=&quot;font-size:23px;font-weight:bold;line-height:28px&quot;&gt;05 Build project context&lt;/div&gt;&lt;div style=&quot;margin-top:10px;font-size:21px;line-height:26px&quot;&gt;Fetch the file tree. The model&lt;br&gt;can use read_files for saved&lt;br&gt;file contents.&lt;/div&gt;" vertex="1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#e8f6f1;strokeColor=#25866b;strokeWidth=1.8;fontColor=#23364b;fontFamily=Arial;align=left;verticalAlign=top;spacing=18;overflow=hidden;">
+          <mxGeometry x="440" y="415" width="320" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="node-6" value="&lt;div style=&quot;font-size:23px;font-weight:bold;line-height:28px&quot;&gt;06 Stream from the model&lt;/div&gt;&lt;div style=&quot;margin-top:10px;font-size:21px;line-height:26px&quot;&gt;Spring AI calls the configured&lt;br&gt;compatible provider and&lt;br&gt;model.&lt;/div&gt;" vertex="1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#fff5dd;strokeColor=#b78222;strokeWidth=1.8;fontColor=#23364b;fontFamily=Arial;align=left;verticalAlign=top;spacing=18;overflow=hidden;">
+          <mxGeometry x="60" y="415" width="320" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="node-7" value="&lt;div style=&quot;font-size:23px;font-weight:bold;line-height:28px&quot;&gt;07 Update the editor&lt;/div&gt;&lt;div style=&quot;margin-top:10px;font-size:21px;line-height:26px&quot;&gt;SSE chunks update chat and&lt;br&gt;parsed file edits in browser&lt;br&gt;memory.&lt;/div&gt;" vertex="1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#eaf2ff;strokeColor=#3878c5;strokeWidth=1.8;fontColor=#23364b;fontFamily=Arial;align=left;verticalAlign=top;spacing=18;overflow=hidden;">
+          <mxGeometry x="60" y="670" width="320" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="node-8" value="&lt;div style=&quot;font-size:23px;font-weight:bold;line-height:28px&quot;&gt;08 Finish the text stream&lt;/div&gt;&lt;div style=&quot;margin-top:10px;font-size:21px;line-height:26px&quot;&gt;Provider completion ends&lt;br&gt;streaming; it does not prove&lt;br&gt;files are durable.&lt;/div&gt;" vertex="1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#fff5dd;strokeColor=#b78222;strokeWidth=1.8;fontColor=#23364b;fontFamily=Arial;align=left;verticalAlign=top;spacing=18;overflow=hidden;">
+          <mxGeometry x="440" y="670" width="320" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="node-9" value="&lt;div style=&quot;font-size:23px;font-weight:bold;line-height:28px&quot;&gt;09 Finalize in background&lt;/div&gt;&lt;div style=&quot;margin-top:10px;font-size:21px;line-height:26px&quot;&gt;Record usage/messages,&lt;br&gt;parse events, then start the&lt;br&gt;file-delivery flow.&lt;/div&gt;" vertex="1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#e8f6f1;strokeColor=#25866b;strokeWidth=1.8;fontColor=#23364b;fontFamily=Arial;align=left;verticalAlign=top;spacing=18;overflow=hidden;">
+          <mxGeometry x="820" y="670" width="320" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="footer" value="SSE = server-sent events. The prompt uses the current message and project files; stored chat history is a separate read API." style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=top;strokeColor=none;fillColor=none;fontFamily=Arial;fontSize=18;fontStyle=0;fontColor=#526278;" vertex="1" parent="1">
+          <mxGeometry x="60" y="984" width="1080" height="25" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="06-file-delivery" name="06  Generated files: Kafka, MinIO and acknowledgement">
+    <mxGraphModel dx="1200" dy="1030" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1200" pageHeight="1030" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="06  Generated files: Kafka, MinIO and acknowledgement" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=top;strokeColor=none;fillColor=none;fontFamily=Arial;fontSize=31;fontStyle=1;fontColor=#23364b;" vertex="1" parent="1">
+          <mxGeometry x="60" y="30" width="1100" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="subtitle" value="A saga ID joins one file-edit event to its storage result." style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=top;strokeColor=none;fillColor=none;fontFamily=Arial;fontSize=20;fontStyle=0;fontColor=#526278;" vertex="1" parent="1">
+          <mxGeometry x="60" y="80" width="1080" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-0" value="" edge="1" parent="1" source="node-1" target="node-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;strokeWidth=2.6;strokeColor=#60778c;dashed=0;exitX=1;exitY=0.5;exitPerimeter=1;entryX=0;entryY=0.5;entryPerimeter=1;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-1" value="" edge="1" parent="1" source="node-2" target="node-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;strokeWidth=2.6;strokeColor=#60778c;dashed=0;exitX=1;exitY=0.5;exitPerimeter=1;entryX=0;entryY=0.5;entryPerimeter=1;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-2" value="" edge="1" parent="1" source="node-3" target="node-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;strokeWidth=2.6;strokeColor=#60778c;dashed=0;exitX=0.5;exitY=1;exitPerimeter=1;entryX=0.5;entryY=0;entryPerimeter=1;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-3" value="" edge="1" parent="1" source="node-4" target="node-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;strokeWidth=2.6;strokeColor=#60778c;dashed=0;exitX=0;exitY=0.5;exitPerimeter=1;entryX=1;entryY=0.5;entryPerimeter=1;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-4" value="" edge="1" parent="1" source="node-5" target="node-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;strokeWidth=2.6;strokeColor=#60778c;dashed=0;exitX=0;exitY=0.5;exitPerimeter=1;entryX=1;entryY=0.5;entryPerimeter=1;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-5" value="" edge="1" parent="1" source="node-6" target="node-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;strokeWidth=2.6;strokeColor=#60778c;dashed=0;exitX=0.5;exitY=1;exitPerimeter=1;entryX=0.5;entryY=0;entryPerimeter=1;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-6" value="" edge="1" parent="1" source="node-7" target="node-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;strokeWidth=2.6;strokeColor=#60778c;dashed=0;exitX=1;exitY=0.5;exitPerimeter=1;entryX=0;entryY=0.5;entryPerimeter=1;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-7" value="" edge="1" parent="1" source="node-8" target="node-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;strokeWidth=2.6;strokeColor=#60778c;dashed=0;exitX=1;exitY=0.5;exitPerimeter=1;entryX=0;entryY=0.5;entryPerimeter=1;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="node-1" value="&lt;div style=&quot;font-size:23px;font-weight:bold;line-height:28px&quot;&gt;01 Parse completed edits&lt;/div&gt;&lt;div style=&quot;margin-top:10px;font-size:21px;line-height:26px&quot;&gt;Create FILE_EDIT chat&lt;br&gt;events and a unique saga ID&lt;br&gt;for each file.&lt;/div&gt;" vertex="1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#e8f6f1;strokeColor=#25866b;strokeWidth=1.8;fontColor=#23364b;fontFamily=Arial;align=left;verticalAlign=top;spacing=18;overflow=hidden;">
+          <mxGeometry x="60" y="160" width="320" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="node-2" value="&lt;div style=&quot;font-size:23px;font-weight:bold;line-height:28px&quot;&gt;02 Commit tracking first&lt;/div&gt;&lt;div style=&quot;margin-top:10px;font-size:21px;line-height:26px&quot;&gt;Persist PENDING events in&lt;br&gt;the intelligence database&lt;br&gt;before publishing.&lt;/div&gt;" vertex="1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#f1edfb;strokeColor=#8461b3;strokeWidth=1.8;fontColor=#23364b;fontFamily=Arial;align=left;verticalAlign=top;spacing=18;overflow=hidden;">
+          <mxGeometry x="440" y="160" width="320" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="node-3" value="&lt;div style=&quot;font-size:23px;font-weight:bold;line-height:28px&quot;&gt;03 Send a Kafka request&lt;/div&gt;&lt;div style=&quot;margin-top:10px;font-size:21px;line-height:26px&quot;&gt;Topic:&lt;br&gt;file-storage-request-event;&lt;br&gt;partition key: project ID.&lt;/div&gt;" vertex="1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#fff5dd;strokeColor=#b78222;strokeWidth=1.8;fontColor=#23364b;fontFamily=Arial;align=left;verticalAlign=top;spacing=18;overflow=hidden;">
+          <mxGeometry x="820" y="160" width="320" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="node-4" value="&lt;div style=&quot;font-size:23px;font-weight:bold;line-height:28px&quot;&gt;04 Consume in&lt;br&gt;Workspace&lt;/div&gt;&lt;div style=&quot;margin-top:10px;font-size:18px;line-height:23px&quot;&gt;If sagaId is already processed, skip&lt;br&gt;the write and resend success.&lt;/div&gt;" vertex="1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#e8f6f1;strokeColor=#25866b;strokeWidth=1.8;fontColor=#23364b;fontFamily=Arial;align=left;verticalAlign=top;spacing=18;overflow=hidden;">
+          <mxGeometry x="820" y="415" width="320" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="node-5" value="&lt;div style=&quot;font-size:23px;font-weight:bold;line-height:28px&quot;&gt;05 Write the object&lt;/div&gt;&lt;div style=&quot;margin-top:10px;font-size:21px;line-height:26px&quot;&gt;Save the file under&lt;br&gt;projectId/path in the MinIO&lt;br&gt;projects bucket.&lt;/div&gt;" vertex="1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#f1edfb;strokeColor=#8461b3;strokeWidth=1.8;fontColor=#23364b;fontFamily=Arial;align=left;verticalAlign=top;spacing=18;overflow=hidden;">
+          <mxGeometry x="440" y="415" width="320" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="node-6" value="&lt;div style=&quot;font-size:23px;font-weight:bold;line-height:28px&quot;&gt;06 Commit file metadata&lt;/div&gt;&lt;div style=&quot;margin-top:10px;font-size:21px;line-height:26px&quot;&gt;Save project_files, then&lt;br&gt;processed_events for&lt;br&gt;duplicate detection.&lt;/div&gt;" vertex="1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#f1edfb;strokeColor=#8461b3;strokeWidth=1.8;fontColor=#23364b;fontFamily=Arial;align=left;verticalAlign=top;spacing=18;overflow=hidden;">
+          <mxGeometry x="60" y="415" width="320" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="node-7" value="&lt;div style=&quot;font-size:23px;font-weight:bold;line-height:28px&quot;&gt;07 Send&lt;br&gt;acknowledgement&lt;/div&gt;&lt;div style=&quot;margin-top:10px;font-size:18px;line-height:23px&quot;&gt;Topic: file-store-responses. Failed&lt;br&gt;ACK sends surface for a retry.&lt;/div&gt;" vertex="1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#fff5dd;strokeColor=#b78222;strokeWidth=1.8;fontColor=#23364b;fontFamily=Arial;align=left;verticalAlign=top;spacing=18;overflow=hidden;">
+          <mxGeometry x="60" y="670" width="320" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="node-8" value="&lt;div style=&quot;font-size:23px;font-weight:bold;line-height:28px&quot;&gt;08 Resolve the chat event&lt;/div&gt;&lt;div style=&quot;margin-top:10px;font-size:21px;line-height:26px&quot;&gt;Intelligence matches sagaId&lt;br&gt;and sets CONFIRMED or&lt;br&gt;FAILED.&lt;/div&gt;" vertex="1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#e8f6f1;strokeColor=#25866b;strokeWidth=1.8;fontColor=#23364b;fontFamily=Arial;align=left;verticalAlign=top;spacing=18;overflow=hidden;">
+          <mxGeometry x="440" y="670" width="320" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="node-9" value="&lt;div style=&quot;font-size:23px;font-weight:bold;line-height:28px&quot;&gt;09 Read saved content&lt;/div&gt;&lt;div style=&quot;margin-top:10px;font-size:21px;line-height:26px&quot;&gt;A later file or preview request&lt;br&gt;reads stored metadata and&lt;br&gt;object bytes.&lt;/div&gt;" vertex="1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#eaf2ff;strokeColor=#3878c5;strokeWidth=1.8;fontColor=#23364b;fontFamily=Arial;align=left;verticalAlign=top;spacing=18;overflow=hidden;">
+          <mxGeometry x="820" y="670" width="320" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="footer" value="No transactional outbox or cross-store transaction: a crash can leave partial progress. The acknowledgement is not sent on the original&lt;br&gt;SSE stream." style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=top;strokeColor=none;fillColor=none;fontFamily=Arial;fontSize=18;fontStyle=0;fontColor=#526278;" vertex="1" parent="1">
+          <mxGeometry x="60" y="961" width="1080" height="50" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="07-editor-preview" name="07  Edit, save and run a browser preview">
+    <mxGraphModel dx="1200" dy="1030" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1200" pageHeight="1030" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="07  Edit, save and run a browser preview" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=top;strokeColor=none;fillColor=none;fontFamily=Arial;fontSize=31;fontStyle=1;fontColor=#23364b;" vertex="1" parent="1">
+          <mxGeometry x="60" y="30" width="1100" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="subtitle" value="Generated frontend code runs in an isolated browser frame." style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=top;strokeColor=none;fillColor=none;fontFamily=Arial;fontSize=20;fontStyle=0;fontColor=#526278;" vertex="1" parent="1">
+          <mxGeometry x="60" y="80" width="1080" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-0" value="" edge="1" parent="1" source="node-1" target="node-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;strokeWidth=2.6;strokeColor=#60778c;dashed=0;exitX=1;exitY=0.5;exitPerimeter=1;entryX=0;entryY=0.5;entryPerimeter=1;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-1" value="" edge="1" parent="1" source="node-2" target="node-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;strokeWidth=2.6;strokeColor=#60778c;dashed=0;exitX=1;exitY=0.5;exitPerimeter=1;entryX=0;entryY=0.5;entryPerimeter=1;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-2" value="" edge="1" parent="1" source="node-3" target="node-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;strokeWidth=2.6;strokeColor=#60778c;dashed=0;exitX=0.5;exitY=1;exitPerimeter=1;entryX=0.5;entryY=0;entryPerimeter=1;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-3" value="" edge="1" parent="1" source="node-4" target="node-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;strokeWidth=2.6;strokeColor=#60778c;dashed=0;exitX=0;exitY=0.5;exitPerimeter=1;entryX=1;entryY=0.5;entryPerimeter=1;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-4" value="" edge="1" parent="1" source="node-5" target="node-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;strokeWidth=2.6;strokeColor=#60778c;dashed=0;exitX=0;exitY=0.5;exitPerimeter=1;entryX=1;entryY=0.5;entryPerimeter=1;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-5" value="" edge="1" parent="1" source="node-6" target="node-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;strokeWidth=2.6;strokeColor=#60778c;dashed=0;exitX=0.5;exitY=1;exitPerimeter=1;entryX=0.5;entryY=0;entryPerimeter=1;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-6" value="" edge="1" parent="1" source="node-7" target="node-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;strokeWidth=2.6;strokeColor=#60778c;dashed=0;exitX=1;exitY=0.5;exitPerimeter=1;entryX=0;entryY=0.5;entryPerimeter=1;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-7" value="" edge="1" parent="1" source="node-8" target="node-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;strokeWidth=2.6;strokeColor=#60778c;dashed=0;exitX=1;exitY=0.5;exitPerimeter=1;entryX=0;entryY=0.5;entryPerimeter=1;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="node-1" value="&lt;div style=&quot;font-size:23px;font-weight:bold;line-height:28px&quot;&gt;01 Edit or generate&lt;/div&gt;&lt;div style=&quot;margin-top:10px;font-size:21px;line-height:26px&quot;&gt;The editor holds drafts and&lt;br&gt;recent streamed file updates&lt;br&gt;locally.&lt;/div&gt;" vertex="1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#eaf2ff;strokeColor=#3878c5;strokeWidth=1.8;fontColor=#23364b;fontFamily=Arial;align=left;verticalAlign=top;spacing=18;overflow=hidden;">
+          <mxGeometry x="60" y="160" width="320" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="node-2" value="&lt;div style=&quot;font-size:23px;font-weight:bold;line-height:28px&quot;&gt;02 Save a file&lt;/div&gt;&lt;div style=&quot;margin-top:10px;font-size:19px;line-height:24px&quot;&gt;PUT&lt;br&gt;/workspace/projects/{id}/files/con&lt;br&gt;tent; requires EDIT permission.&lt;/div&gt;" vertex="1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#eaf2ff;strokeColor=#3878c5;strokeWidth=1.8;fontColor=#23364b;fontFamily=Arial;align=left;verticalAlign=top;spacing=18;overflow=hidden;">
+          <mxGeometry x="440" y="160" width="320" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="node-3" value="&lt;div style=&quot;font-size:23px;font-weight:bold;line-height:28px&quot;&gt;03 Persist synchronously&lt;/div&gt;&lt;div style=&quot;margin-top:10px;font-size:21px;line-height:26px&quot;&gt;Workspace normalizes the&lt;br&gt;path, writes MinIO and saves&lt;br&gt;file metadata.&lt;/div&gt;" vertex="1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#f1edfb;strokeColor=#8461b3;strokeWidth=1.8;fontColor=#23364b;fontFamily=Arial;align=left;verticalAlign=top;spacing=18;overflow=hidden;">
+          <mxGeometry x="820" y="160" width="320" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="node-4" value="&lt;div style=&quot;font-size:23px;font-weight:bold;line-height:28px&quot;&gt;04 Fetch a preview&lt;br&gt;bundle&lt;/div&gt;&lt;div style=&quot;margin-top:10px;font-size:18px;line-height:23px&quot;&gt;GET&lt;br&gt;/workspace/projects/{id}/preview&lt;br&gt;reads allowed saved frontend files.&lt;/div&gt;" vertex="1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#e8f6f1;strokeColor=#25866b;strokeWidth=1.8;fontColor=#23364b;fontFamily=Arial;align=left;verticalAlign=top;spacing=18;overflow=hidden;">
+          <mxGeometry x="820" y="415" width="320" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="node-5" value="&lt;div style=&quot;font-size:23px;font-weight:bold;line-height:28px&quot;&gt;05 Prepare current files&lt;/div&gt;&lt;div style=&quot;margin-top:10px;font-size:21px;line-height:26px&quot;&gt;PreviewPanel merges the&lt;br&gt;saved bundle with recent&lt;br&gt;local file updates.&lt;/div&gt;" vertex="1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#eaf2ff;strokeColor=#3878c5;strokeWidth=1.8;fontColor=#23364b;fontFamily=Arial;align=left;verticalAlign=top;spacing=18;overflow=hidden;">
+          <mxGeometry x="440" y="415" width="320" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="node-6" value="&lt;div style=&quot;font-size:23px;font-weight:bold;line-height:28px&quot;&gt;06 Cross the frame&lt;br&gt;boundary&lt;/div&gt;&lt;div style=&quot;margin-top:10px;font-size:18px;line-height:23px&quot;&gt;Send source files + runId by&lt;br&gt;postMessage to&lt;br&gt;sandbox=allow-scripts.&lt;/div&gt;" vertex="1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#eaf2ff;strokeColor=#3878c5;strokeWidth=1.8;fontColor=#23364b;fontFamily=Arial;align=left;verticalAlign=top;spacing=18;overflow=hidden;">
+          <mxGeometry x="60" y="415" width="320" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="node-7" value="&lt;div style=&quot;font-size:23px;font-weight:bold;line-height:28px&quot;&gt;07 Compile and resolve&lt;/div&gt;&lt;div style=&quot;margin-top:10px;font-size:21px;line-height:26px&quot;&gt;The TypeScript compiler&lt;br&gt;resolves relative imports, @/&lt;br&gt;and bundled packages.&lt;/div&gt;" vertex="1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#e8f6f1;strokeColor=#25866b;strokeWidth=1.8;fontColor=#23364b;fontFamily=Arial;align=left;verticalAlign=top;spacing=18;overflow=hidden;">
+          <mxGeometry x="60" y="670" width="320" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="node-8" value="&lt;div style=&quot;font-size:23px;font-weight:bold;line-height:28px&quot;&gt;08 Render the React app&lt;/div&gt;&lt;div style=&quot;margin-top:10px;font-size:19px;line-height:24px&quot;&gt;The frame loads&lt;br&gt;HTML/CSS/modules. Its&lt;br&gt;temporary storage resets on&lt;br&gt;restart.&lt;/div&gt;" vertex="1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#eaf2ff;strokeColor=#3878c5;strokeWidth=1.8;fontColor=#23364b;fontFamily=Arial;align=left;verticalAlign=top;spacing=18;overflow=hidden;">
+          <mxGeometry x="440" y="670" width="320" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="node-9" value="&lt;div style=&quot;font-size:23px;font-weight:bold;line-height:28px&quot;&gt;09 Report success or&lt;br&gt;error&lt;/div&gt;&lt;div style=&quot;margin-top:10px;font-size:18px;line-height:23px&quot;&gt;The parent checks frame identity&lt;br&gt;and runId; errors appear in the UI.&lt;/div&gt;" vertex="1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#fff0eb;strokeColor=#bd6142;strokeWidth=1.8;fontColor=#23364b;fontFamily=Arial;align=left;verticalAlign=top;spacing=18;overflow=hidden;">
+          <mxGeometry x="820" y="670" width="320" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="footer" value="Production CSP blocks preview network calls and parent-origin access. Unsupported packages fail clearly; no arbitrary npm install or&lt;br&gt;server process runs." style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=top;strokeColor=none;fillColor=none;fontFamily=Arial;fontSize=18;fontStyle=0;fontColor=#526278;" vertex="1" parent="1">
+          <mxGeometry x="60" y="961" width="1080" height="50" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="08-sharing" name="08  Share private access with another account">
+    <mxGraphModel dx="1200" dy="1030" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1200" pageHeight="1030" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="08  Share private access with another account" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=top;strokeColor=none;fillColor=none;fontFamily=Arial;fontSize=31;fontStyle=1;fontColor=#23364b;" vertex="1" parent="1">
+          <mxGeometry x="60" y="30" width="1100" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="subtitle" value="Sharing grants membership; copying a URL alone does not grant access." style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=top;strokeColor=none;fillColor=none;fontFamily=Arial;fontSize=20;fontStyle=0;fontColor=#526278;" vertex="1" parent="1">
+          <mxGeometry x="60" y="80" width="1080" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-0" value="" edge="1" parent="1" source="node-1" target="node-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;strokeWidth=2.6;strokeColor=#60778c;dashed=0;exitX=1;exitY=0.5;exitPerimeter=1;entryX=0;entryY=0.5;entryPerimeter=1;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-1" value="" edge="1" parent="1" source="node-2" target="node-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;strokeWidth=2.6;strokeColor=#60778c;dashed=0;exitX=1;exitY=0.5;exitPerimeter=1;entryX=0;entryY=0.5;entryPerimeter=1;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-2" value="" edge="1" parent="1" source="node-3" target="node-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;strokeWidth=2.6;strokeColor=#60778c;dashed=0;exitX=0.5;exitY=1;exitPerimeter=1;entryX=0.5;entryY=0;entryPerimeter=1;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-3" value="" edge="1" parent="1" source="node-4" target="node-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;strokeWidth=2.6;strokeColor=#60778c;dashed=0;exitX=0;exitY=0.5;exitPerimeter=1;entryX=1;entryY=0.5;entryPerimeter=1;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-4" value="" edge="1" parent="1" source="node-5" target="node-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;strokeWidth=2.6;strokeColor=#60778c;dashed=0;exitX=0;exitY=0.5;exitPerimeter=1;entryX=1;entryY=0.5;entryPerimeter=1;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="node-1" value="&lt;div style=&quot;font-size:23px;font-weight:bold;line-height:28px&quot;&gt;01 Owner opens Share&lt;/div&gt;&lt;div style=&quot;margin-top:10px;font-size:21px;line-height:26px&quot;&gt;Only the project owner can&lt;br&gt;manage members and their&lt;br&gt;roles.&lt;/div&gt;" vertex="1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#eaf2ff;strokeColor=#3878c5;strokeWidth=1.8;fontColor=#23364b;fontFamily=Arial;align=left;verticalAlign=top;spacing=18;overflow=hidden;">
+          <mxGeometry x="60" y="160" width="320" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="node-2" value="&lt;div style=&quot;font-size:23px;font-weight:bold;line-height:28px&quot;&gt;02 Choose person + role&lt;/div&gt;&lt;div style=&quot;margin-top:10px;font-size:21px;line-height:26px&quot;&gt;Enter an existing account&lt;br&gt;email and choose Editor or&lt;br&gt;Viewer.&lt;/div&gt;" vertex="1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#eaf2ff;strokeColor=#3878c5;strokeWidth=1.8;fontColor=#23364b;fontFamily=Arial;align=left;verticalAlign=top;spacing=18;overflow=hidden;">
+          <mxGeometry x="440" y="160" width="320" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="node-3" value="&lt;div style=&quot;font-size:23px;font-weight:bold;line-height:28px&quot;&gt;03 Resolve the account&lt;/div&gt;&lt;div style=&quot;margin-top:10px;font-size:21px;line-height:26px&quot;&gt;Workspace asks Account for&lt;br&gt;the existing user ID by email.&lt;/div&gt;" vertex="1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#e8f6f1;strokeColor=#25866b;strokeWidth=1.8;fontColor=#23364b;fontFamily=Arial;align=left;verticalAlign=top;spacing=18;overflow=hidden;">
+          <mxGeometry x="820" y="160" width="320" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="node-4" value="&lt;div style=&quot;font-size:23px;font-weight:bold;line-height:28px&quot;&gt;04 Store membership&lt;/div&gt;&lt;div style=&quot;margin-top:10px;font-size:21px;line-height:26px&quot;&gt;Save (projectId, userId) and&lt;br&gt;role; reject duplicates or&lt;br&gt;owner changes.&lt;/div&gt;" vertex="1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#f1edfb;strokeColor=#8461b3;strokeWidth=1.8;fontColor=#23364b;fontFamily=Arial;align=left;verticalAlign=top;spacing=18;overflow=hidden;">
+          <mxGeometry x="820" y="415" width="320" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="node-5" value="&lt;div style=&quot;font-size:23px;font-weight:bold;line-height:28px&quot;&gt;05 Show shared projects&lt;/div&gt;&lt;div style=&quot;margin-top:10px;font-size:21px;line-height:26px&quot;&gt;The member&amp;#x27;s dashboard&lt;br&gt;includes the project with their&lt;br&gt;assigned role.&lt;/div&gt;" vertex="1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#eaf2ff;strokeColor=#3878c5;strokeWidth=1.8;fontColor=#23364b;fontFamily=Arial;align=left;verticalAlign=top;spacing=18;overflow=hidden;">
+          <mxGeometry x="440" y="415" width="320" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="node-6" value="&lt;div style=&quot;font-size:23px;font-weight:bold;line-height:28px&quot;&gt;06 Enforce every action&lt;/div&gt;&lt;div style=&quot;margin-top:10px;font-size:21px;line-height:26px&quot;&gt;Workspace permissions also&lt;br&gt;protect internal AI checks&lt;br&gt;and file reads.&lt;/div&gt;" vertex="1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#e8f6f1;strokeColor=#25866b;strokeWidth=1.8;fontColor=#23364b;fontFamily=Arial;align=left;verticalAlign=top;spacing=18;overflow=hidden;">
+          <mxGeometry x="60" y="415" width="320" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="node-note0" value="&lt;div style=&quot;font-size:23px;font-weight:bold;line-height:28px&quot;&gt;Owner&lt;/div&gt;&lt;div style=&quot;margin-top:10px;font-size:20px;line-height:25px&quot;&gt;View, edit, delete, publish and&lt;br&gt;manage project membership.&lt;/div&gt;" vertex="1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#e8f6f1;strokeColor=#25866b;strokeWidth=1.8;fontColor=#23364b;fontFamily=Arial;align=left;verticalAlign=top;spacing=18;overflow=hidden;">
+          <mxGeometry x="60" y="700" width="320" height="165" as="geometry" />
+        </mxCell>
+        <mxCell id="node-note1" value="&lt;div style=&quot;font-size:23px;font-weight:bold;line-height:28px&quot;&gt;Editor&lt;/div&gt;&lt;div style=&quot;margin-top:10px;font-size:20px;line-height:25px&quot;&gt;View, edit, generate, download,&lt;br&gt;view members and delete.&lt;/div&gt;" vertex="1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#fff0eb;strokeColor=#bd6142;strokeWidth=1.8;fontColor=#23364b;fontFamily=Arial;align=left;verticalAlign=top;spacing=18;overflow=hidden;">
+          <mxGeometry x="440" y="700" width="320" height="165" as="geometry" />
+        </mxCell>
+        <mxCell id="node-note2" value="&lt;div style=&quot;font-size:23px;font-weight:bold;line-height:28px&quot;&gt;Viewer&lt;/div&gt;&lt;div style=&quot;margin-top:10px;font-size:20px;line-height:25px&quot;&gt;Read files, download, preview&lt;br&gt;and view members; no writes.&lt;/div&gt;" vertex="1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#eaf2ff;strokeColor=#3878c5;strokeWidth=1.8;fontColor=#23364b;fontFamily=Arial;align=left;verticalAlign=top;spacing=18;overflow=hidden;">
+          <mxGeometry x="820" y="700" width="320" height="165" as="geometry" />
+        </mxCell>
+        <mxCell id="footer" value="Current role enum allows Editors to soft-delete projects. Only Owners can manage members or publish/unpublish." style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=top;strokeColor=none;fillColor=none;fontFamily=Arial;fontSize=18;fontStyle=0;fontColor=#526278;" vertex="1" parent="1">
+          <mxGeometry x="60" y="984" width="1080" height="25" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="09-publication" name="09  Publish a saved app as a public snapshot">
+    <mxGraphModel dx="1200" dy="1030" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1200" pageHeight="1030" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="09  Publish a saved app as a public snapshot" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=top;strokeColor=none;fillColor=none;fontFamily=Arial;fontSize=31;fontStyle=1;fontColor=#23364b;" vertex="1" parent="1">
+          <mxGeometry x="60" y="30" width="1100" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="subtitle" value="A publication is a stored frontend snapshot, not a new cloud deployment." style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=top;strokeColor=none;fillColor=none;fontFamily=Arial;fontSize=20;fontStyle=0;fontColor=#526278;" vertex="1" parent="1">
+          <mxGeometry x="60" y="80" width="1080" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-0" value="" edge="1" parent="1" source="node-1" target="node-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;strokeWidth=2.6;strokeColor=#60778c;dashed=0;exitX=1;exitY=0.5;exitPerimeter=1;entryX=0;entryY=0.5;entryPerimeter=1;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-1" value="" edge="1" parent="1" source="node-2" target="node-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;strokeWidth=2.6;strokeColor=#60778c;dashed=0;exitX=1;exitY=0.5;exitPerimeter=1;entryX=0;entryY=0.5;entryPerimeter=1;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-2" value="" edge="1" parent="1" source="node-3" target="node-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;strokeWidth=2.6;strokeColor=#60778c;dashed=0;exitX=0.5;exitY=1;exitPerimeter=1;entryX=0.5;entryY=0;entryPerimeter=1;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-3" value="" edge="1" parent="1" source="node-4" target="node-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;strokeWidth=2.6;strokeColor=#60778c;dashed=0;exitX=0;exitY=0.5;exitPerimeter=1;entryX=1;entryY=0.5;entryPerimeter=1;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-4" value="" edge="1" parent="1" source="node-5" target="node-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;strokeWidth=2.6;strokeColor=#60778c;dashed=0;exitX=0;exitY=0.5;exitPerimeter=1;entryX=1;entryY=0.5;entryPerimeter=1;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-5" value="" edge="1" parent="1" source="node-6" target="node-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;strokeWidth=2.6;strokeColor=#60778c;dashed=0;exitX=0.5;exitY=1;exitPerimeter=1;entryX=0.5;entryY=0;entryPerimeter=1;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-6" value="" edge="1" parent="1" source="node-7" target="node-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;strokeWidth=2.6;strokeColor=#60778c;dashed=0;exitX=1;exitY=0.5;exitPerimeter=1;entryX=0;entryY=0.5;entryPerimeter=1;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-7" value="" edge="1" parent="1" source="node-8" target="node-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;strokeWidth=2.6;strokeColor=#60778c;dashed=0;exitX=1;exitY=0.5;exitPerimeter=1;entryX=0;entryY=0.5;entryPerimeter=1;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="node-1" value="&lt;div style=&quot;font-size:23px;font-weight:bold;line-height:28px&quot;&gt;01 Owner selects Publish&lt;/div&gt;&lt;div style=&quot;margin-top:10px;font-size:21px;line-height:26px&quot;&gt;POST&lt;br&gt;/workspace/projects/{id}/publi&lt;br&gt;cation after checking the app.&lt;/div&gt;" vertex="1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#eaf2ff;strokeColor=#3878c5;strokeWidth=1.8;fontColor=#23364b;fontFamily=Arial;align=left;verticalAlign=top;spacing=18;overflow=hidden;">
+          <mxGeometry x="60" y="160" width="320" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="node-2" value="&lt;div style=&quot;font-size:23px;font-weight:bold;line-height:28px&quot;&gt;02 Lock the active project&lt;/div&gt;&lt;div style=&quot;margin-top:10px;font-size:21px;line-height:26px&quot;&gt;Workspace rejects deleted&lt;br&gt;projects and captures&lt;br&gt;allowed frontend files.&lt;/div&gt;" vertex="1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#e8f6f1;strokeColor=#25866b;strokeWidth=1.8;fontColor=#23364b;fontFamily=Arial;align=left;verticalAlign=top;spacing=18;overflow=hidden;">
+          <mxGeometry x="440" y="160" width="320" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="node-3" value="&lt;div style=&quot;font-size:23px;font-weight:bold;line-height:28px&quot;&gt;03 Validate the app entry&lt;/div&gt;&lt;div style=&quot;margin-top:10px;font-size:21px;line-height:26px&quot;&gt;Require index.html or a&lt;br&gt;supported main/index/App&lt;br&gt;source entry.&lt;/div&gt;" vertex="1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#e8f6f1;strokeColor=#25866b;strokeWidth=1.8;fontColor=#23364b;fontFamily=Arial;align=left;verticalAlign=top;spacing=18;overflow=hidden;">
+          <mxGeometry x="820" y="160" width="320" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="node-4" value="&lt;div style=&quot;font-size:23px;font-weight:bold;line-height:28px&quot;&gt;04 Save a snapshot +&lt;br&gt;slug&lt;/div&gt;&lt;div style=&quot;margin-top:10px;font-size:18px;line-height:23px&quot;&gt;Store name/files as JSON text in&lt;br&gt;project_publications; mark active.&lt;/div&gt;" vertex="1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#f1edfb;strokeColor=#8461b3;strokeWidth=1.8;fontColor=#23364b;fontFamily=Arial;align=left;verticalAlign=top;spacing=18;overflow=hidden;">
+          <mxGeometry x="820" y="415" width="320" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="node-5" value="&lt;div style=&quot;font-size:23px;font-weight:bold;line-height:28px&quot;&gt;05 Return a public link&lt;/div&gt;&lt;div style=&quot;margin-top:10px;font-size:21px;line-height:26px&quot;&gt;The stable link is /p/{slug}; no&lt;br&gt;viewer login is required.&lt;/div&gt;" vertex="1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#eaf2ff;strokeColor=#3878c5;strokeWidth=1.8;fontColor=#23364b;fontFamily=Arial;align=left;verticalAlign=top;spacing=18;overflow=hidden;">
+          <mxGeometry x="440" y="415" width="320" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="node-6" value="&lt;div style=&quot;font-size:23px;font-weight:bold;line-height:28px&quot;&gt;06 Load anonymously&lt;/div&gt;&lt;div style=&quot;margin-top:10px;font-size:21px;line-height:26px&quot;&gt;PublishedApp calls GET&lt;br&gt;/workspace/public/apps/{slug&lt;br&gt;} without credentials.&lt;/div&gt;" vertex="1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#eaf2ff;strokeColor=#3878c5;strokeWidth=1.8;fontColor=#23364b;fontFamily=Arial;align=left;verticalAlign=top;spacing=18;overflow=hidden;">
+          <mxGeometry x="60" y="415" width="320" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="node-7" value="&lt;div style=&quot;font-size:23px;font-weight:bold;line-height:28px&quot;&gt;07 Check active + not&lt;br&gt;deleted&lt;/div&gt;&lt;div style=&quot;margin-top:10px;font-size:18px;line-height:23px&quot;&gt;Workspace reads only an active&lt;br&gt;snapshot whose project still exists.&lt;/div&gt;" vertex="1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#e8f6f1;strokeColor=#25866b;strokeWidth=1.8;fontColor=#23364b;fontFamily=Arial;align=left;verticalAlign=top;spacing=18;overflow=hidden;">
+          <mxGeometry x="60" y="670" width="320" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="node-8" value="&lt;div style=&quot;font-size:23px;font-weight:bold;line-height:28px&quot;&gt;08 Render in the sandbox&lt;/div&gt;&lt;div style=&quot;margin-top:10px;font-size:21px;line-height:26px&quot;&gt;The same isolated browser&lt;br&gt;runtime displays the&lt;br&gt;published frontend.&lt;/div&gt;" vertex="1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#eaf2ff;strokeColor=#3878c5;strokeWidth=1.8;fontColor=#23364b;fontFamily=Arial;align=left;verticalAlign=top;spacing=18;overflow=hidden;">
+          <mxGeometry x="440" y="670" width="320" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="node-9" value="&lt;div style=&quot;font-size:23px;font-weight:bold;line-height:28px&quot;&gt;09 Manage later versions&lt;/div&gt;&lt;div style=&quot;margin-top:10px;font-size:21px;line-height:26px&quot;&gt;Republish replaces the&lt;br&gt;snapshot. Unpublish or&lt;br&gt;delete blocks future reads.&lt;/div&gt;" vertex="1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#fff0eb;strokeColor=#bd6142;strokeWidth=1.8;fontColor=#23364b;fontFamily=Arial;align=left;verticalAlign=top;spacing=18;overflow=hidden;">
+          <mxGeometry x="820" y="670" width="320" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="footer" value="Private edits do not alter the published snapshot until republish. Public readers can obtain its frontend source; downloaded copies&lt;br&gt;cannot be recalled." style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=top;strokeColor=none;fillColor=none;fontFamily=Arial;fontSize=18;fontStyle=0;fontColor=#526278;" vertex="1" parent="1">
+          <mxGeometry x="60" y="961" width="1080" height="50" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="10-data-model" name="10  Data ownership and relationships">
+    <mxGraphModel dx="1200" dy="1270" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1200" pageHeight="1270" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="10  Data ownership and relationships" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=top;strokeColor=none;fillColor=none;fontFamily=Arial;fontSize=31;fontStyle=1;fontColor=#23364b;" vertex="1" parent="1">
+          <mxGeometry x="60" y="30" width="1100" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="subtitle" value="Logical data model: one service owns each database; other services use APIs or events." style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=top;strokeColor=none;fillColor=none;fontFamily=Arial;fontSize=20;fontStyle=0;fontColor=#526278;" vertex="1" parent="1">
+          <mxGeometry x="60" y="80" width="1080" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-0" value="" edge="1" parent="1" source="node-users" target="node-subs" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;strokeWidth=2.6;strokeColor=#60778c;dashed=0;exitX=0.5;exitY=1;exitPerimeter=1;entryX=0.5;entryY=0;entryPerimeter=1;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-label-0" value="1 user : many records" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=top;strokeColor=none;fillColor=none;fontFamily=Arial;fontSize=18;fontStyle=0;fontColor=#23364b;" vertex="1" parent="1">
+          <mxGeometry x="125.0" y="354" width="190.0" height="32" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-1" value="" edge="1" parent="1" source="node-plans" target="node-subs" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;strokeWidth=2.6;strokeColor=#60778c;dashed=0;exitX=0.5;exitY=0;exitPerimeter=1;entryX=0.5;entryY=1;entryPerimeter=1;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-label-1" value="1 plan : many records" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=top;strokeColor=none;fillColor=none;fontFamily=Arial;fontSize=18;fontStyle=0;fontColor=#23364b;" vertex="1" parent="1">
+          <mxGeometry x="125.5" y="689" width="189.0" height="32" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-2" value="" edge="1" parent="1" source="node-projects" target="node-members" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;strokeWidth=2.6;strokeColor=#60778c;dashed=0;exitX=0.5;exitY=1;exitPerimeter=1;entryX=0.5;entryY=0;entryPerimeter=1;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-label-2" value="1 : many" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=top;strokeColor=none;fillColor=none;fontFamily=Arial;fontSize=18;fontStyle=0;fontColor=#23364b;" vertex="1" parent="1">
+          <mxGeometry x="557.5" y="344" width="85.0" height="32" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-3" value="" edge="1" parent="1" source="node-projects" target="node-files" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;strokeWidth=2.6;strokeColor=#60778c;dashed=0;exitX=0;exitY=0.5;exitPerimeter=1;entryX=0;entryY=0.5;entryPerimeter=1;">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="413" y="242" />
+              <mxPoint x="413" y="693" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge-4" value="" edge="1" parent="1" source="node-projects" target="node-publications" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;strokeWidth=2.6;strokeColor=#60778c;dashed=0;exitX=1;exitY=0.5;exitPerimeter=1;entryX=1;entryY=0.5;entryPerimeter=1;">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="785" y="242" />
+              <mxPoint x="785" y="898" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge-5" value="" edge="1" parent="1" source="node-sessions" target="node-messages" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;strokeWidth=2.6;strokeColor=#60778c;dashed=0;exitX=0.5;exitY=1;exitPerimeter=1;entryX=0.5;entryY=0;entryPerimeter=1;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-label-5" value="1 : many" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=top;strokeColor=none;fillColor=none;fontFamily=Arial;fontSize=18;fontStyle=0;fontColor=#23364b;" vertex="1" parent="1">
+          <mxGeometry x="937.5" y="354" width="85.0" height="32" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-6" value="" edge="1" parent="1" source="node-messages" target="node-events" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;strokeWidth=2.6;strokeColor=#60778c;dashed=0;exitX=0.5;exitY=1;exitPerimeter=1;entryX=0.5;entryY=0;entryPerimeter=1;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-label-6" value="1 : many" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=top;strokeColor=none;fillColor=none;fontFamily=Arial;fontSize=18;fontStyle=0;fontColor=#23364b;" vertex="1" parent="1">
+          <mxGeometry x="937.5" y="624" width="85.0" height="32" as="geometry" />
+        </mxCell>
+        <mxCell id="node-users" value="&lt;div style=&quot;font-size:23px;font-weight:bold;line-height:28px&quot;&gt;users&lt;/div&gt;&lt;div style=&quot;margin-top:10px;font-size:19px;line-height:24px&quot;&gt;PK id&lt;br&gt;username, password hash&lt;br&gt;name, lifecycle timestamps&lt;/div&gt;" vertex="1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#f1edfb;strokeColor=#8461b3;strokeWidth=1.8;fontColor=#23364b;fontFamily=Arial;align=left;verticalAlign=top;spacing=18;overflow=hidden;">
+          <mxGeometry x="60" y="170" width="320" height="145" as="geometry" />
+        </mxCell>
+        <mxCell id="node-subs" value="&lt;div style=&quot;font-size:23px;font-weight:bold;line-height:28px&quot;&gt;subscription&lt;/div&gt;&lt;div style=&quot;margin-top:10px;font-size:20px;line-height:25px&quot;&gt;PK id&lt;br&gt;FK user_id -&amp;gt; users&lt;br&gt;FK plan_id -&amp;gt; plan&lt;br&gt;status and period&lt;/div&gt;" vertex="1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#f1edfb;strokeColor=#8461b3;strokeWidth=1.8;fontColor=#23364b;fontFamily=Arial;align=left;verticalAlign=top;spacing=18;overflow=hidden;">
+          <mxGeometry x="60" y="440" width="320" height="185" as="geometry" />
+        </mxCell>
+        <mxCell id="node-plans" value="&lt;div style=&quot;font-size:23px;font-weight:bold;line-height:28px&quot;&gt;plan&lt;/div&gt;&lt;div style=&quot;margin-top:10px;font-size:20px;line-height:25px&quot;&gt;PK id&lt;br&gt;max_projects, daily tokens&lt;br&gt;provider billing reference&lt;/div&gt;" vertex="1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#f1edfb;strokeColor=#8461b3;strokeWidth=1.8;fontColor=#23364b;fontFamily=Arial;align=left;verticalAlign=top;spacing=18;overflow=hidden;">
+          <mxGeometry x="60" y="785" width="320" height="155" as="geometry" />
+        </mxCell>
+        <mxCell id="node-projects" value="&lt;div style=&quot;font-size:23px;font-weight:bold;line-height:28px&quot;&gt;projects&lt;/div&gt;&lt;div style=&quot;margin-top:10px;font-size:19px;line-height:24px&quot;&gt;PK id&lt;br&gt;name, deleted_at&lt;br&gt;The root of a workspace&lt;/div&gt;" vertex="1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#f1edfb;strokeColor=#8461b3;strokeWidth=1.8;fontColor=#23364b;fontFamily=Arial;align=left;verticalAlign=top;spacing=18;overflow=hidden;">
+          <mxGeometry x="440" y="170" width="320" height="145" as="geometry" />
+        </mxCell>
+        <mxCell id="node-members" value="&lt;div style=&quot;font-size:23px;font-weight:bold;line-height:28px&quot;&gt;project_members&lt;/div&gt;&lt;div style=&quot;margin-top:10px;font-size:20px;line-height:25px&quot;&gt;PK (project_id, user_id)&lt;br&gt;FK project_id&lt;br&gt;OWNER / EDITOR / VIEWER&lt;/div&gt;" vertex="1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#f1edfb;strokeColor=#8461b3;strokeWidth=1.8;fontColor=#23364b;fontFamily=Arial;align=left;verticalAlign=top;spacing=18;overflow=hidden;">
+          <mxGeometry x="440" y="410" width="320" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="node-files" value="&lt;div style=&quot;font-size:23px;font-weight:bold;line-height:28px&quot;&gt;project_files&lt;/div&gt;&lt;div style=&quot;margin-top:10px;font-size:19px;line-height:24px&quot;&gt;PK id; FK project_id&lt;br&gt;Unique (project_id, path)&lt;br&gt;MinIO object key&lt;/div&gt;" vertex="1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#f1edfb;strokeColor=#8461b3;strokeWidth=1.8;fontColor=#23364b;fontFamily=Arial;align=left;verticalAlign=top;spacing=18;overflow=hidden;">
+          <mxGeometry x="440" y="620" width="320" height="145" as="geometry" />
+        </mxCell>
+        <mxCell id="node-publications" value="&lt;div style=&quot;font-size:23px;font-weight:bold;line-height:28px&quot;&gt;project_publications&lt;/div&gt;&lt;div style=&quot;margin-top:10px;font-size:19px;line-height:24px&quot;&gt;PK/FK project_id; unique slug&lt;br&gt;active, published_at&lt;br&gt;snapshot: frontend JSON&lt;/div&gt;" vertex="1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#f1edfb;strokeColor=#8461b3;strokeWidth=1.8;fontColor=#23364b;fontFamily=Arial;align=left;verticalAlign=top;spacing=18;overflow=hidden;">
+          <mxGeometry x="440" y="825" width="320" height="145" as="geometry" />
+        </mxCell>
+        <mxCell id="node-processed" value="&lt;div style=&quot;font-size:23px;font-weight:bold;line-height:28px&quot;&gt;processed_events&lt;/div&gt;&lt;div style=&quot;margin-top:10px;font-size:19px;line-height:24px&quot;&gt;PK saga_id&lt;br&gt;Duplicate-request marker&lt;/div&gt;" vertex="1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#f1edfb;strokeColor=#8461b3;strokeWidth=1.8;fontColor=#23364b;fontFamily=Arial;align=left;verticalAlign=top;spacing=18;overflow=hidden;">
+          <mxGeometry x="440" y="1030" width="320" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="node-sessions" value="&lt;div style=&quot;font-size:23px;font-weight:bold;line-height:28px&quot;&gt;chat_sessions&lt;/div&gt;&lt;div style=&quot;margin-top:10px;font-size:20px;line-height:25px&quot;&gt;PK (project_id, user_id)&lt;br&gt;One user/project session&lt;/div&gt;" vertex="1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#f1edfb;strokeColor=#8461b3;strokeWidth=1.8;fontColor=#23364b;fontFamily=Arial;align=left;verticalAlign=top;spacing=18;overflow=hidden;">
+          <mxGeometry x="820" y="170" width="320" height="145" as="geometry" />
+        </mxCell>
+        <mxCell id="node-messages" value="&lt;div style=&quot;font-size:23px;font-weight:bold;line-height:28px&quot;&gt;chat_messages&lt;/div&gt;&lt;div style=&quot;margin-top:10px;font-size:20px;line-height:25px&quot;&gt;PK id; FK session key&lt;br&gt;role, content, tokens_used&lt;/div&gt;" vertex="1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#f1edfb;strokeColor=#8461b3;strokeWidth=1.8;fontColor=#23364b;fontFamily=Arial;align=left;verticalAlign=top;spacing=18;overflow=hidden;">
+          <mxGeometry x="820" y="440" width="320" height="145" as="geometry" />
+        </mxCell>
+        <mxCell id="node-events" value="&lt;div style=&quot;font-size:23px;font-weight:bold;line-height:28px&quot;&gt;chat_events&lt;/div&gt;&lt;div style=&quot;margin-top:10px;font-size:20px;line-height:25px&quot;&gt;PK id; FK chat_message_id&lt;br&gt;type, content, file_path&lt;br&gt;saga_id, status, ordering&lt;/div&gt;" vertex="1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#f1edfb;strokeColor=#8461b3;strokeWidth=1.8;fontColor=#23364b;fontFamily=Arial;align=left;verticalAlign=top;spacing=18;overflow=hidden;">
+          <mxGeometry x="820" y="710" width="320" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="node-usage" value="&lt;div style=&quot;font-size:23px;font-weight:bold;line-height:28px&quot;&gt;usage_logs&lt;/div&gt;&lt;div style=&quot;margin-top:10px;font-size:20px;line-height:25px&quot;&gt;PK id; unique (user_id, date)&lt;br&gt;Daily tokens_used&lt;/div&gt;" vertex="1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#f1edfb;strokeColor=#8461b3;strokeWidth=1.8;fontColor=#23364b;fontFamily=Arial;align=left;verticalAlign=top;spacing=18;overflow=hidden;">
+          <mxGeometry x="820" y="1000" width="320" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="label0" value="ACCOUNT DATABASE" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=top;strokeColor=none;fillColor=none;fontFamily=Arial;fontSize=20;fontStyle=0;fontColor=#526278;" vertex="1" parent="1">
+          <mxGeometry x="60" y="120" width="1080" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="label1" value="WORKSPACE DATABASE" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=top;strokeColor=none;fillColor=none;fontFamily=Arial;fontSize=20;fontStyle=0;fontColor=#526278;" vertex="1" parent="1">
+          <mxGeometry x="440" y="120" width="1080" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="label2" value="INTELLIGENCE DATABASE" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=top;strokeColor=none;fillColor=none;fontFamily=Arial;fontSize=20;fontStyle=0;fontColor=#526278;" vertex="1" parent="1">
+          <mxGeometry x="820" y="120" width="1080" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="label3" value="Workspace child cardinality: members/files = many; publication = zero or one." style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=top;strokeColor=none;fillColor=none;fontFamily=Arial;fontSize=18;fontStyle=0;fontColor=#526278;" vertex="1" parent="1">
+          <mxGeometry x="60" y="1157" width="1080" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="footer" value="Cross-service userId/projectId values are logical references, not cross-database foreign keys. MinIO stores file bytes; Redis is not the&lt;br&gt;project database." style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=top;strokeColor=none;fillColor=none;fontFamily=Arial;fontSize=18;fontStyle=0;fontColor=#526278;" vertex="1" parent="1">
+          <mxGeometry x="60" y="1201" width="1080" height="50" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="11-delivery-deployment" name="11  Build, release and run the application">
+    <mxGraphModel dx="1200" dy="1270" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1200" pageHeight="1270" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="11  Build, release and run the application" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=top;strokeColor=none;fillColor=none;fontFamily=Arial;fontSize=31;fontStyle=1;fontColor=#23364b;" vertex="1" parent="1">
+          <mxGeometry x="60" y="30" width="1100" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="subtitle" value="Deployment options are templates; a Git push does not automatically deploy to the cloud." style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=top;strokeColor=none;fillColor=none;fontFamily=Arial;fontSize=20;fontStyle=0;fontColor=#526278;" vertex="1" parent="1">
+          <mxGeometry x="60" y="80" width="1080" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-0" value="" edge="1" parent="1" source="node-source" target="node-ci" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;strokeWidth=2.6;strokeColor=#60778c;dashed=0;exitX=1;exitY=0.5;exitPerimeter=1;entryX=0;entryY=0.5;entryPerimeter=1;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-1" value="" edge="1" parent="1" source="node-ci" target="node-release" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;strokeWidth=2.6;strokeColor=#60778c;dashed=1;exitX=1;exitY=0.5;exitPerimeter=1;entryX=0;entryY=0.5;entryPerimeter=1;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-2" value="" edge="1" parent="1" source="node-release" target="node-registry" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;strokeWidth=2.6;strokeColor=#60778c;dashed=0;exitX=0.5;exitY=1;exitPerimeter=1;entryX=0.5;entryY=0;entryPerimeter=1;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-3" value="" edge="1" parent="1" source="node-registry" target="node-choice" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;strokeWidth=2.6;strokeColor=#60778c;dashed=0;exitX=0;exitY=0.5;exitPerimeter=1;entryX=1;entryY=0.5;entryPerimeter=1;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-4" value="" edge="1" parent="1" source="node-choice" target="node-compose" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;strokeWidth=2.6;strokeColor=#60778c;dashed=0;exitX=0.5;exitY=1;exitPerimeter=1;entryX=0.5;entryY=0;entryPerimeter=1;">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="600" y="660" />
+              <mxPoint x="220" y="660" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge-5" value="" edge="1" parent="1" source="node-choice" target="node-demo" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;strokeWidth=2.6;strokeColor=#60778c;dashed=0;exitX=0.5;exitY=1;exitPerimeter=1;entryX=0.5;entryY=0;entryPerimeter=1;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-6" value="" edge="1" parent="1" source="node-choice" target="node-prod" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;strokeWidth=2.6;strokeColor=#60778c;dashed=0;exitX=0.5;exitY=1;exitPerimeter=1;entryX=0.5;entryY=0;entryPerimeter=1;">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="600" y="640" />
+              <mxPoint x="980" y="640" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge-7" value="" edge="1" parent="1" source="node-compose" target="node-validate" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;strokeWidth=2.6;strokeColor=#60778c;dashed=0;exitX=0.5;exitY=1;exitPerimeter=1;entryX=0.5;entryY=0;entryPerimeter=1;">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="220" y="965" />
+              <mxPoint x="600" y="965" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge-8" value="" edge="1" parent="1" source="node-demo" target="node-validate" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;strokeWidth=2.6;strokeColor=#60778c;dashed=0;exitX=0.5;exitY=1;exitPerimeter=1;entryX=0.5;entryY=0;entryPerimeter=1;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-9" value="" edge="1" parent="1" source="node-prod" target="node-validate" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;strokeWidth=2.6;strokeColor=#60778c;dashed=0;exitX=0.5;exitY=1;exitPerimeter=1;entryX=0.5;entryY=0;entryPerimeter=1;">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="980" y="985" />
+              <mxPoint x="600" y="985" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="node-source" value="&lt;div style=&quot;font-size:23px;font-weight:bold;line-height:28px&quot;&gt;Commit reviewed source&lt;/div&gt;&lt;div style=&quot;margin-top:10px;font-size:21px;line-height:26px&quot;&gt;The repository keeps code,&lt;br&gt;tests and deployment&lt;br&gt;templates.&lt;/div&gt;" vertex="1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#f1f3f6;strokeColor=#7a8796;strokeWidth=1.8;fontColor=#23364b;fontFamily=Arial;align=left;verticalAlign=top;spacing=18;overflow=hidden;">
+          <mxGeometry x="60" y="155" width="320" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="node-ci" value="&lt;div style=&quot;font-size:23px;font-weight:bold;line-height:28px&quot;&gt;CI on push / pull request&lt;/div&gt;&lt;div style=&quot;margin-top:10px;font-size:21px;line-height:26px&quot;&gt;Java 21 build/tests, frontend&lt;br&gt;validation and manifest&lt;br&gt;checks.&lt;/div&gt;" vertex="1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#e8f6f1;strokeColor=#25866b;strokeWidth=1.8;fontColor=#23364b;fontFamily=Arial;align=left;verticalAlign=top;spacing=18;overflow=hidden;">
+          <mxGeometry x="440" y="155" width="320" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="node-release" value="&lt;div style=&quot;font-size:23px;font-weight:bold;line-height:28px&quot;&gt;Manual image release&lt;/div&gt;&lt;div style=&quot;margin-top:10px;font-size:21px;line-height:26px&quot;&gt;Reviewed tag + architecture;&lt;br&gt;verify before image&lt;br&gt;publication.&lt;/div&gt;" vertex="1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#e8f6f1;strokeColor=#25866b;strokeWidth=1.8;fontColor=#23364b;fontFamily=Arial;align=left;verticalAlign=top;spacing=18;overflow=hidden;">
+          <mxGeometry x="820" y="155" width="320" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="node-registry" value="&lt;div style=&quot;font-size:23px;font-weight:bold;line-height:28px&quot;&gt;Authorized registry&lt;/div&gt;&lt;div style=&quot;margin-top:10px;font-size:21px;line-height:26px&quot;&gt;Five application images with&lt;br&gt;immutable deployment&lt;br&gt;digests.&lt;/div&gt;" vertex="1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#f1edfb;strokeColor=#8461b3;strokeWidth=1.8;fontColor=#23364b;fontFamily=Arial;align=left;verticalAlign=top;spacing=18;overflow=hidden;">
+          <mxGeometry x="820" y="430" width="320" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="node-choice" value="&lt;div style=&quot;font-size:23px;font-weight:bold;line-height:28px&quot;&gt;Choose a deployment&lt;/div&gt;&lt;div style=&quot;margin-top:10px;font-size:21px;line-height:26px&quot;&gt;Select one target design and&lt;br&gt;prepare its runtime&lt;br&gt;configuration.&lt;/div&gt;" vertex="1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#f1f3f6;strokeColor=#7a8796;strokeWidth=1.8;fontColor=#23364b;fontFamily=Arial;align=left;verticalAlign=top;spacing=18;overflow=hidden;">
+          <mxGeometry x="440" y="430" width="320" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="node-compose" value="&lt;div style=&quot;font-size:23px;font-weight:bold;line-height:28px&quot;&gt;Single-host Compose&lt;/div&gt;&lt;div style=&quot;margin-top:10px;font-size:21px;line-height:26px&quot;&gt;Nine components + init job&lt;br&gt;Named volumes and DNS&lt;br&gt;Optional Caddy HTTPS&lt;/div&gt;" vertex="1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#e8f6f1;strokeColor=#25866b;strokeWidth=1.8;fontColor=#23364b;fontFamily=Arial;align=left;verticalAlign=top;spacing=18;overflow=hidden;">
+          <mxGeometry x="60" y="720" width="320" height="185" as="geometry" />
+        </mxCell>
+        <mxCell id="node-demo" value="&lt;div style=&quot;font-size:23px;font-weight:bold;line-height:28px&quot;&gt;Basic OKE demo&lt;/div&gt;&lt;div style=&quot;margin-top:10px;font-size:21px;line-height:26px&quot;&gt;One private A1 worker&lt;br&gt;2 OCPU / 12 GB template&lt;br&gt;Three 50Gi application PVCs&lt;/div&gt;" vertex="1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#e8f6f1;strokeColor=#25866b;strokeWidth=1.8;fontColor=#23364b;fontFamily=Arial;align=left;verticalAlign=top;spacing=18;overflow=hidden;">
+          <mxGeometry x="440" y="720" width="320" height="185" as="geometry" />
+        </mxCell>
+        <mxCell id="node-prod" value="&lt;div style=&quot;font-size:23px;font-weight:bold;line-height:28px&quot;&gt;Production overlay&lt;/div&gt;&lt;div style=&quot;margin-top:10px;font-size:21px;line-height:26px&quot;&gt;Replicated stateless services&lt;br&gt;Managed&lt;br&gt;database/broker/cache&lt;br&gt;Managed object storage&lt;/div&gt;" vertex="1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#e8f6f1;strokeColor=#25866b;strokeWidth=1.8;fontColor=#23364b;fontFamily=Arial;align=left;verticalAlign=top;spacing=18;overflow=hidden;">
+          <mxGeometry x="820" y="720" width="320" height="185" as="geometry" />
+        </mxCell>
+        <mxCell id="node-validate" value="&lt;div style=&quot;font-size:23px;font-weight:bold;line-height:28px&quot;&gt;Verify the selected target&lt;/div&gt;&lt;div style=&quot;margin-top:10px;font-size:18px;line-height:23px&quot;&gt;Readiness, data writes, restore&lt;br&gt;plan, provider access and external&lt;br&gt;HTTPS.&lt;/div&gt;" vertex="1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#eaf2ff;strokeColor=#3878c5;strokeWidth=1.8;fontColor=#23364b;fontFamily=Arial;align=left;verticalAlign=top;spacing=18;overflow=hidden;">
+          <mxGeometry x="440" y="1020" width="320" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="label0" value="Alternative targets (choose one)" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=top;strokeColor=none;fillColor=none;fontFamily=Arial;fontSize=18;fontStyle=0;fontColor=#526278;" vertex="1" parent="1">
+          <mxGeometry x="60" y="672" width="1080" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="footer" value="For every target: configure secrets privately, preserve data, verify DNS/TLS and test login + generation from the intended user network." style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=top;strokeColor=none;fillColor=none;fontFamily=Arial;fontSize=18;fontStyle=0;fontColor=#526278;" vertex="1" parent="1">
+          <mxGeometry x="60" y="1224" width="1080" height="25" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="12-plan-usage" name="12  Plan, daily usage and billing boundaries">
+    <mxGraphModel dx="1200" dy="1225" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1200" pageHeight="1225" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="12  Plan, daily usage and billing boundaries" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=top;strokeColor=none;fillColor=none;fontFamily=Arial;fontSize=31;fontStyle=1;fontColor=#23364b;" vertex="1" parent="1">
+          <mxGeometry x="60" y="30" width="1100" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="subtitle" value="The plan dialog combines three reads; generation checks and recording happen at different times." style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=top;strokeColor=none;fillColor=none;fontFamily=Arial;fontSize=20;fontStyle=0;fontColor=#526278;" vertex="1" parent="1">
+          <mxGeometry x="60" y="80" width="1080" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-0" value="" edge="1" parent="1" source="node-dialog" target="node-plan" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;strokeWidth=2.6;strokeColor=#60778c;dashed=0;exitX=0.5;exitY=1;exitPerimeter=1;entryX=0.5;entryY=0;entryPerimeter=1;">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="600" y="360" />
+              <mxPoint x="220" y="360" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge-1" value="" edge="1" parent="1" source="node-dialog" target="node-owned" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;strokeWidth=2.6;strokeColor=#60778c;dashed=0;exitX=0.5;exitY=1;exitPerimeter=1;entryX=0.5;entryY=0;entryPerimeter=1;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-2" value="" edge="1" parent="1" source="node-dialog" target="node-daily" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;strokeWidth=2.6;strokeColor=#60778c;dashed=0;exitX=0.5;exitY=1;exitPerimeter=1;entryX=0.5;entryY=0;entryPerimeter=1;">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="600" y="340" />
+              <mxPoint x="980" y="340" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge-3" value="" edge="1" parent="1" source="node-plan" target="node-display" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;strokeWidth=2.6;strokeColor=#60778c;dashed=0;exitX=0.5;exitY=1;exitPerimeter=1;entryX=0.5;entryY=0;entryPerimeter=1;">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="220" y="660" />
+              <mxPoint x="600" y="660" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge-4" value="" edge="1" parent="1" source="node-owned" target="node-display" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;strokeWidth=2.6;strokeColor=#60778c;dashed=0;exitX=0.5;exitY=1;exitPerimeter=1;entryX=0.5;entryY=0;entryPerimeter=1;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-5" value="" edge="1" parent="1" source="node-daily" target="node-display" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;strokeWidth=2.6;strokeColor=#60778c;dashed=0;exitX=0.5;exitY=1;exitPerimeter=1;entryX=0.5;entryY=0;entryPerimeter=1;">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="980" y="680" />
+              <mxPoint x="600" y="680" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge-6" value="" edge="1" parent="1" source="node-gate" target="node-record" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;strokeWidth=2.6;strokeColor=#60778c;dashed=0;exitX=1;exitY=0.5;exitPerimeter=1;entryX=0;entryY=0.5;entryPerimeter=1;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-7" value="" edge="1" parent="1" source="node-record" target="node-limits" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;strokeWidth=2.6;strokeColor=#60778c;dashed=0;exitX=1;exitY=0.5;exitPerimeter=1;entryX=0;entryY=0.5;entryPerimeter=1;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="node-dialog" value="&lt;div style=&quot;font-size:23px;font-weight:bold;line-height:28px&quot;&gt;Open Plan &amp;amp; usage&lt;/div&gt;&lt;div style=&quot;margin-top:10px;font-size:21px;line-height:26px&quot;&gt;The frontend starts these&lt;br&gt;three requests in parallel.&lt;/div&gt;" vertex="1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#eaf2ff;strokeColor=#3878c5;strokeWidth=1.8;fontColor=#23364b;fontFamily=Arial;align=left;verticalAlign=top;spacing=18;overflow=hidden;">
+          <mxGeometry x="440" y="140" width="320" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="node-plan" value="&lt;div style=&quot;font-size:23px;font-weight:bold;line-height:28px&quot;&gt;Account: subscribed plan&lt;/div&gt;&lt;div style=&quot;margin-top:10px;font-size:21px;line-height:26px&quot;&gt;Plan name, project limit, daily&lt;br&gt;token allowance and status.&lt;/div&gt;" vertex="1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#e8f6f1;strokeColor=#25866b;strokeWidth=1.8;fontColor=#23364b;fontFamily=Arial;align=left;verticalAlign=top;spacing=18;overflow=hidden;">
+          <mxGeometry x="60" y="425" width="320" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="node-owned" value="&lt;div style=&quot;font-size:23px;font-weight:bold;line-height:28px&quot;&gt;Workspace: project list&lt;/div&gt;&lt;div style=&quot;margin-top:10px;font-size:21px;line-height:26px&quot;&gt;The frontend counts&lt;br&gt;accessible projects with&lt;br&gt;OWNER role.&lt;/div&gt;" vertex="1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#e8f6f1;strokeColor=#25866b;strokeWidth=1.8;fontColor=#23364b;fontFamily=Arial;align=left;verticalAlign=top;spacing=18;overflow=hidden;">
+          <mxGeometry x="440" y="425" width="320" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="node-daily" value="&lt;div style=&quot;font-size:23px;font-weight:bold;line-height:28px&quot;&gt;Intelligence: today usage&lt;/div&gt;&lt;div style=&quot;margin-top:10px;font-size:21px;line-height:26px&quot;&gt;Return recorded tokens,&lt;br&gt;server date and server&lt;br&gt;time-zone ID.&lt;/div&gt;" vertex="1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#e8f6f1;strokeColor=#25866b;strokeWidth=1.8;fontColor=#23364b;fontFamily=Arial;align=left;verticalAlign=top;spacing=18;overflow=hidden;">
+          <mxGeometry x="820" y="425" width="320" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="node-display" value="&lt;div style=&quot;font-size:23px;font-weight:bold;line-height:28px&quot;&gt;Display the combined&lt;br&gt;result&lt;/div&gt;&lt;div style=&quot;margin-top:10px;font-size:18px;line-height:23px&quot;&gt;Owned projects / limit&lt;br&gt;Daily tokens / allowance&lt;br&gt;Plan status + usage date&lt;/div&gt;" vertex="1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#eaf2ff;strokeColor=#3878c5;strokeWidth=1.8;fontColor=#23364b;fontFamily=Arial;align=left;verticalAlign=top;spacing=18;overflow=hidden;">
+          <mxGeometry x="440" y="715" width="320" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="node-gate" value="&lt;div style=&quot;font-size:23px;font-weight:bold;line-height:28px&quot;&gt;Before generation&lt;/div&gt;&lt;div style=&quot;margin-top:10px;font-size:20px;line-height:25px&quot;&gt;Reject if current daily usage&lt;br&gt;already meets the plan limit.&lt;/div&gt;" vertex="1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#fff0eb;strokeColor=#bd6142;strokeWidth=1.8;fontColor=#23364b;fontFamily=Arial;align=left;verticalAlign=top;spacing=18;overflow=hidden;">
+          <mxGeometry x="60" y="970" width="320" height="145" as="geometry" />
+        </mxCell>
+        <mxCell id="node-record" value="&lt;div style=&quot;font-size:23px;font-weight:bold;line-height:28px&quot;&gt;After stream completion&lt;/div&gt;&lt;div style=&quot;margin-top:10px;font-size:19px;line-height:24px&quot;&gt;Record reported tokens, or&lt;br&gt;estimate from prompt/output text.&lt;/div&gt;" vertex="1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#fff5dd;strokeColor=#b78222;strokeWidth=1.8;fontColor=#23364b;fontFamily=Arial;align=left;verticalAlign=top;spacing=18;overflow=hidden;">
+          <mxGeometry x="440" y="970" width="320" height="145" as="geometry" />
+        </mxCell>
+        <mxCell id="node-limits" value="&lt;div style=&quot;font-size:23px;font-weight:bold;line-height:28px&quot;&gt;Accounting limitations&lt;/div&gt;&lt;div style=&quot;margin-top:10px;font-size:19px;line-height:24px&quot;&gt;In-flight usage is not reserved.&lt;br&gt;Actual model/provider charges&lt;br&gt;are separate.&lt;/div&gt;" vertex="1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#fff0eb;strokeColor=#bd6142;strokeWidth=1.8;fontColor=#23364b;fontFamily=Arial;align=left;verticalAlign=top;spacing=18;overflow=hidden;">
+          <mxGeometry x="820" y="970" width="320" height="145" as="geometry" />
+        </mxCell>
+        <mxCell id="label0" value="Separate generation accounting path" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=top;strokeColor=none;fillColor=none;fontFamily=Arial;fontSize=18;fontStyle=0;fontColor=#526278;" vertex="1" parent="1">
+          <mxGeometry x="60" y="922" width="1080" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="footer" value="Paid upgrade UI is disabled. Stripe backend code remains optional. Usage estimates and application limits are not provider invoices or&lt;br&gt;a strict spend cap." style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=top;strokeColor=none;fillColor=none;fontFamily=Arial;fontSize=18;fontStyle=0;fontColor=#526278;" vertex="1" parent="1">
+          <mxGeometry x="60" y="1156" width="1080" height="50" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
