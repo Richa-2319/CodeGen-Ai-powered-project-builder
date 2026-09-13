@@ -1,0 +1,102 @@
+{
+  "captured_on": "2026-09-13",
+  "frontend_commit": "662c872b4438b541608e29ed1e8e8a9842a880ab",
+  "environment": "Unmodified frontend build with temporary loopback API fixtures",
+  "browser": "Chrome",
+  "data": "Fictional sample users, projects, chat, code, membership, publication and usage",
+  "post_processing": "None; page viewport JPEG screenshots",
+  "validation_scope": "UI documentation; does not verify backend, AI model, billing or deployment",
+  "images": [
+    {
+      "file": "images/01-login.jpg",
+      "width": 1512,
+      "height": 805,
+      "bytes": 22244,
+      "sha256": "88536d0c349cfceb91f40ee62938234a67857b5b3414cb9cf0b6704083c27e1e"
+    },
+    {
+      "file": "images/02-signup.jpg",
+      "width": 1512,
+      "height": 805,
+      "bytes": 24212,
+      "sha256": "b4696b916f9a6021baa156b9e229c46d347d9fe7386c1b75fb238fd0c6705731"
+    },
+    {
+      "file": "images/03-projects.jpg",
+      "width": 1512,
+      "height": 805,
+      "bytes": 37574,
+      "sha256": "bf72734d23bf4d8da2d19da051b1e58d249a94174fb879e09cf2b50de36ba820"
+    },
+    {
+      "file": "images/04-create-project.jpg",
+      "width": 1512,
+      "height": 805,
+      "bytes": 31248,
+      "sha256": "c97c97a62dbf03715c6e46eba1339d2b58afb03bb2824b00945fd9e32ac82746"
+    },
+    {
+      "file": "images/05-search-empty.jpg",
+      "width": 1512,
+      "height": 805,
+      "bytes": 29175,
+      "sha256": "c9ca0e082982213e6e1575a8d769a7550c991b9a14da7cf286e7bca67f0dd08f"
+    },
+    {
+      "file": "images/06-workspace-preview.jpg",
+      "width": 1512,
+      "height": 805,
+      "bytes": 86545,
+      "sha256": "6274c5cc79b50b1d4d0ae211e4bb53d29b7b31729566fc8a282c35fe5d25e7bf"
+    },
+    {
+      "file": "images/07-code-editor.jpg",
+      "width": 1512,
+      "height": 805,
+      "bytes": 147654,
+      "sha256": "9d4c44dda3b4f4f09b26825b953b8881972b67addeccbaec47eea0ae34077bf3"
+    },
+    {
+      "file": "images/08-share-permissions.jpg",
+      "width": 1512,
+      "height": 805,
+      "bytes": 72424,
+      "sha256": "82bbd5713f91c61472a22ace7301bd78e4d273338b1aebc437a25a2a1fba764a"
+    },
+    {
+      "file": "images/09-publish.jpg",
+      "width": 1512,
+      "height": 805,
+      "bytes": 75854,
+      "sha256": "19e0deca9c31f5c64e3e40f21783eb64382f3940d2c451672b9256c0c3dd231a"
+    },
+    {
+      "file": "images/10-published-controls.jpg",
+      "width": 1512,
+      "height": 805,
+      "bytes": 59855,
+      "sha256": "75249f2d853f1ebbaacb4ea9f237d299fa4c9c0e5bd3ed1bfc03f7f9db9c1865"
+    },
+    {
+      "file": "images/11-plan-usage.jpg",
+      "width": 1512,
+      "height": 805,
+      "bytes": 51508,
+      "sha256": "f4ce5f6a1405d4a685c1b83355e914bb8f62e81e16dd535c930718a1cb061944"
+    },
+    {
+      "file": "images/12-public-app.jpg",
+      "width": 1512,
+      "height": 805,
+      "bytes": 47207,
+      "sha256": "3b8a97550d46bf44b35377903a1c7b1eadffda2b2dff57dc2e51681748ba59f6"
+    },
+    {
+      "file": "images/13-invalid-app-link.jpg",
+      "width": 1512,
+      "height": 805,
+      "bytes": 8582,
+      "sha256": "42628aa4004f7d278267eea6c5fcbeda74fc6326abf6d27fdab7914b3e6467ae"
+    }
+  ]
+}

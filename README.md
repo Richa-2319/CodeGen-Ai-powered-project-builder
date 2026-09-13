@@ -20,6 +20,11 @@ generation; model usage is separate from application hosting.
 
 ## Architecture
 
+Take the [UI screenshot tour](docs/screenshots/README.md) to see the dashboard,
+editor, preview, sharing, publishing and usage screens with safe demo data.
+
+![CodeGen workspace and browser preview with fictional demo data](docs/screenshots/images/06-workspace-preview.jpg)
+
 The frontend proxies same-origin requests through the API gateway to the
 account, workspace and intelligence services. PostgreSQL stores application
 records, Kafka carries file-delivery messages, and MinIO stores generated file

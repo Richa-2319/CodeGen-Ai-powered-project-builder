@@ -6,6 +6,7 @@ This guide explains **the checked-in implementation at `a5f2276`**, inspected on
 
 ## Start with the architecture pack
 
+- [UI screenshot tour](../screenshots/README.md): 13 actual frontend captures with fictional demo data, including editing, preview, sharing and publication.
 - [High Level Design](HIGH-LEVEL-DESIGN.md): requirements, boundaries, contracts, deployment, security, tradeoffs and engineering gaps.
 - [Microservice dataflow](microservice-dataflow.md): labeled connections, exact internal API paths and Kafka payloads.
 - [UML and engineering views](uml-and-engineering-views.md): actors, classes, sequences, state machines, activities, components and failure boundaries.
