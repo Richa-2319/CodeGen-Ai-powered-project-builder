@@ -4,16 +4,41 @@ CodeGen is an AI-assisted project builder. A signed-in user creates a project, a
 
 This guide explains **the checked-in implementation at `a5f2276`**, inspected on 13 September 2026. It does not claim that a cloud endpoint is currently healthy or publicly reachable. The previous deployment checks and their limitations are recorded in [VALIDATION.md](https://github.com/Richa-2319/CodeGen-Ai-powered-project-builder/blob/a5f22762396594eb68ff7693cdecda1ea9e9c243/deployment/VALIDATION.md#L1).
 
+## Start with the architecture pack
+
+- [High Level Design](HIGH-LEVEL-DESIGN.md): requirements, boundaries, contracts, deployment, security, tradeoffs and engineering gaps.
+- [Microservice dataflow](microservice-dataflow.md): labeled connections, exact internal API paths and Kafka payloads.
+- [UML and engineering views](uml-and-engineering-views.md): actors, classes, sequences, state machines, activities, components and failure boundaries.
+- [Kubernetes components](kubernetes-components.md): workloads, Services, storage, configuration, RBAC, networking and cluster platform components.
+
+![Data flowing between the frontend, microservices and storage](diagrams/13-component-dataflow.svg)
+
+## Engineering coverage
+
+| Engineering question | Diagram views |
+| --- | --- |
+| What is the system and how is source organized? | 01 overview, 02 repository/package map, 25 UML components |
+| Who uses it and what can each role do? | 03 authentication, 04 project lifecycle, 08 sharing, 16 use cases |
+| What data crosses service and storage boundaries? | 05 generation, 06 delivery, 13 component dataflow, 14 HTTP communication, 15 Kafka dataflow |
+| What is the logical structure and data model? | 10 ER/data ownership, 17 UML domain classes |
+| In what order do components interact? | 18 AI sequence, 19 publication sequence |
+| What decisions and states exist? | 20 state machines, 21 activity/swimlanes |
+| How do preview, publication and quotas work? | 07 preview, 09 publication, 12 usage |
+| How is it delivered and deployed? | 11 build/release, 22 Kubernetes deployment, 26 cluster components |
+| Where are trust, failure and recovery boundaries? | 23 security, 24 reliability; HLD operational and capacity sections |
+
+This covers the engineering views relevant to the implemented project. Detailed performance timing, measured capacity and SLOs require runtime evidence; recommendations and unverified platform details are labeled in the HLD. Each page is readable independently and editable in the draw.io master.
+
 ## Read the diagrams
 
 - Start with the two maps below, then follow the topic links.
 - Blue means browser/UI, green means application logic, purple means durable data, gold means asynchronous/model work, and gray means optional/shared components.
 - Numbered flow cards show the reading order. Arrows may turn right-to-left on the second row to keep each flow on one readable page.
-- Click an embedded SVG to inspect its full-size, zoomable image. The editable draw.io file contains all 12 numbered pages.
+- Click an embedded SVG to inspect its full-size, zoomable image. The editable draw.io file contains all 26 numbered pages.
 
 **Editable source:** [Open or download the complete draw.io diagram set](diagrams/CodeGen-Architecture-and-Flows.drawio). Open that file in draw.io / [diagrams.net](https://app.diagrams.net/) and choose a numbered page tab. The SVGs below are readable exports; edit the `.drawio` source when changing the diagrams.
 
-## All 12 diagrams
+## All 26 diagrams
 
 | Page | Diagram | Explanation |
 | --- | --- | --- |
@@ -29,6 +54,20 @@ This guide explains **the checked-in implementation at `a5f2276`**, inspected on
 | 10 | [Data ownership](diagrams/10-data-model.svg) | [Read the flow](data-and-deployment.md#10-data-ownership) |
 | 11 | [Build, release and deploy](diagrams/11-delivery-deployment.svg) | [Read the flow](data-and-deployment.md#11-build-release-and-deploy) |
 | 12 | [Plans, quotas and usage](diagrams/12-plan-usage.svg) | [Read the flow](ai-and-file-delivery.md#12-plans-quotas-and-usage) |
+| 13 | [Component dataflow](diagrams/13-component-dataflow.svg) | [Read the view](microservice-dataflow.md#13-full-component-dataflow) |
+| 14 | [Microservice HTTP exchanges](diagrams/14-microservice-http-dataflow.svg) | [Read the view](microservice-dataflow.md#14-direct-microservice-http-exchanges) |
+| 15 | [Kafka and storage dataflow](diagrams/15-kafka-storage-dataflow.svg) | [Read the view](microservice-dataflow.md#15-kafka-file-storage-and-result-dataflow) |
+| 16 | [UML use cases and actors](diagrams/16-uml-use-cases.svg) | [Read the view](uml-and-engineering-views.md#16-uml-use-cases-and-actors) |
+| 17 | [UML domain classes](diagrams/17-uml-domain-classes.svg) | [Read the view](uml-and-engineering-views.md#17-uml-domain-classes) |
+| 18 | [UML AI generation sequence](diagrams/18-uml-ai-sequence.svg) | [Read the view](uml-and-engineering-views.md#18-uml-ai-generation-sequence) |
+| 19 | [UML publication sequence](diagrams/19-uml-publish-sequence.svg) | [Read the view](uml-and-engineering-views.md#19-uml-publish-and-anonymous-read-sequence) |
+| 20 | [UML state machines](diagrams/20-uml-state-machines.svg) | [Read the view](uml-and-engineering-views.md#20-uml-state-machines) |
+| 21 | [UML activity and swimlanes](diagrams/21-uml-build-activity.svg) | [Read the view](uml-and-engineering-views.md#21-uml-activity-and-responsibility-lanes) |
+| 22 | [Kubernetes deployment topology](diagrams/22-kubernetes-deployment.svg) | [Read the view](kubernetes-components.md#22-application-deployment-topology) |
+| 23 | [Security and trust boundaries](diagrams/23-security-trust-boundaries.svg) | [Read the view](uml-and-engineering-views.md#23-trust-boundaries-and-security) |
+| 24 | [Failure and recovery boundaries](diagrams/24-failure-recovery.svg) | [Read the view](uml-and-engineering-views.md#24-failure-and-recovery-boundaries) |
+| 25 | [UML component dependencies](diagrams/25-uml-components.svg) | [Read the view](uml-and-engineering-views.md#25-uml-component-and-package-dependencies) |
+| 26 | [Kubernetes platform components](diagrams/26-kubernetes-platform-components.svg) | [Read the view](kubernetes-components.md#26-cluster-platform-components) |
 
 To edit, download the [complete draw.io file](diagrams/CodeGen-Architecture-and-Flows.drawio) and open it in draw.io. Keep the matching SVG export updated when changing a page so the GitHub guide stays in sync.
 

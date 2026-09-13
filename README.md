@@ -28,8 +28,11 @@ Config Server and Eureka are retained in the source but are not required by
 the Compose or demo deployments.
 
 Explore the [illustrated architecture guide](docs/architecture/README.md) for
-all 12 diagrams, the complete project flow, and the editable
+all 26 diagrams, the complete project flow, and the editable
 [draw.io source](docs/architecture/diagrams/CodeGen-Architecture-and-Flows.drawio).
+The [High Level Design](docs/architecture/HIGH-LEVEL-DESIGN.md) explains the architecture
+and tradeoffs; the [Kubernetes inventory](docs/architecture/kubernetes-components.md)
+covers both application objects and cluster platform components.
 
 For local startup and public HTTPS setup, follow
 [deployment/README.md](deployment/README.md). No publicly reachable demo
