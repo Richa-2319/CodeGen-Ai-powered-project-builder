@@ -122,3 +122,5 @@ For a single-node OKE demonstration with bundled stateful dependencies, use
 `k8s/demo` and its deployment instructions. A new OKE cluster plan is under
 `deployment/oci-oke`. Creating worker nodes, volumes, public ingress, or making
 AI API calls can incur costs; this package does not establish free eligibility.
+
+URL - https://codegen.8-232-162-95.sslip.io/projects/1
